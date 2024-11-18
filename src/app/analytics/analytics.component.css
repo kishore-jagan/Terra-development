@@ -1,92 +1,370 @@
 .analytics-container {
-  background-color: black; /* Black background */
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.chartsContainer {
-  display: grid;
-  flex-wrap: wrap;
-  grid-template-columns: 1fr 1fr; /* Two charts in a row */
-  grid-gap: 50px; /* Gap between chart containers */
-  justify-content: center;
-  align-items: center;
-  background-color: #1e1e1e; /* Light grey background */
-  border-radius: 20px;
-  /* margin: 80px; */
-  padding: 20px;
-  width: 1700px;
-}
-
-.chartContainer {
-  /* background-color: #1e1e1e;   */
-  /* width: 100%;  */
+  padding-left: 100px;
   background-color: black;
-  padding: 20px;
-  border-radius: 8px;
-  /* box-shadow: 0 2px 5px rgb(0, 0, 0, 0.1);
-  border: 1px solid #ccc; */
-  /* max-width: 500px;   */
- }
-
-/* Make the third chart span the entire row */
-/* .chartContainer:nth-child(3) {
-  grid-column: 1 / -1; /* Span across the full width in a single row */
-/* }  */
-
-mat-sidenav {
-  width: 300px; 
-  background-color: black;
-  color: white;
-  padding: 20px;
+  display: flex; 
 }
 
-mat-sidenav-content {
- margin-left: 80px;
+
+/* filter style  flex1*/
+.filterContainer{
+    flex: 1.8; 
+    background-color: #1e1e1e;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 20px;
+   
+  }
+
+  /* Main heading h5 */
+  .filterContainer h5{
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+    padding-bottom: 30px;
+  }
+
+  /* Svg sensor icon */
+   .sensors{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .tide, .adcp{
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    background-color: black;
+    box-shadow:  0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s color 0.3s;
+  }
+  svg{
+    height: 50px;
+    width: 50px;  
+  }
+  .sensors h1{
+    color: rgba(255, 255, 255, 0.775);
+    font-size: 16px;
+    font-weight: 500;
+  }  
+  .selectOption{
+    background-color: rgb(73, 104, 104);
+  }
+
+
+/* filter tide , filter ADCP */
+  .stations{
+    margin: 40px 20px 0 20px; 
+    height: 100px;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stations h3{
+    /* padding-bottom: 5px; */
+    font-size: 22px;
+    font-weight: 400;
+    /* padding-top: 10px; */
+  }
+
+  .h3{
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+    padding-top: 30px;
+    padding-left: 30px;
+  }
+
+
+/* Stations Field */
+  
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+  
+  .field label {
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: white;
+  }
+  
+  .field input, .field select{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+  }
+  
+  .field input[type="date"], 
+  .field input[type="week"], 
+  .field input[type="month"], 
+  .field input[type="number"] {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .field select {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .field [type='date'] {
+    margin-bottom: 5px;
+  }
+  
+  .field input[type="number"] {
+    max-width: 120px;
+  }
+  
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: #888;
+  }
+
+
+
+/* Applying styles using ::ng-deep to penetrate View Encapsulation */
+/* multiselect */
+::ng-deep .custom-multiselect .p-multiselect {
+ 
+    border-radius: 5px;    /* Optional: adjust border radius */
+    background-color: #333; /* Keeping your existing background color */
+    color: white;          /* Keeping your existing text color */
+    font-size: 14px;
+    width: 100%;
+    max-width: 250px;
+    margin-bottom: 30px;
 }
 
-/* Style the button as a filter icon and position in the right corner */
-/* .button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: white;
-  margin-bottom: 20px;
+::ng-deep .custom-multiselect .p-multiselect .p-multiselect-label {
+    color: white; /* Keep the text color white */
+}
+
+
+/* check box */
+.checkbox-group {
+    display: flex; /* Align checkboxes in a row */
+    gap: 20px; /* Space between checkboxes */
+    align-items: center; /* Center align items vertically */
+    margin-top: 5px;
+  }
+
+  .checkbox-group input[type="checkbox"] {
+    width: 18px; /* Increase checkbox size */
+    height: 18px; /* Increase checkbox size */
+    margin-right: 8px; /* Space between checkbox and label */
+  }
+/* check box */
+
+
+
+  
+
+  
+  /* Flex-2: Charts Layout */
+  .chartsContainer {
+    flex: 8.2;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: #1e1e1e;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 20px;
+  }
+  
+  .chartContainer {
+    background-color: #000;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px 0; 
+    display: flex;
+    justify-content: center; /* Center charts horizontally */
+    align-items: center; /* Center charts vertically */
+    flex: 1; /* Allow each chart container to grow equally */
+    min-height: 300px; /* Minimum height for each chart container */
+  }
+  
+  .chart-diagram {
+    width: 100%; /* Chart takes full width of container */
+    height: 100%; /* Chart takes full height of container */
+    margin: 0px;
+
+  }
+
+  @media (max-width: 768px) {
+    .chartContainer {
+      min-height: 200px; /* Decrease minimum height for smaller screens */
+    }
+  }
+
+
+
+
+  /*Common CSS  */
+  /* button */
+
+.submit{
+    height: 40px;
+    width: 130px;
+    border-radius: 15px;
+    background-color: rgb(0, 255, 255);
+    color: rgb(0, 0, 0);
+    margin-top: 40px;
+    font-size: 20px;
+    margin-left: 65px;
+}
+
+
+
+
+
+
+
+/* .container {
+  height: 100%;
+  background: rgb(40, 44, 52);
 } */
 
+/* .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
 
+.loadingspinner {
+  --square: 26px;
+  --offset: 30px;
 
-::ng-deep #chart-demo {
-  height: 600px;
-}
+  --duration: 2.4s;
+  --delay: 0.2s;
+  --timing-function: ease-in-out;
 
-::ng-deep #radarChart {
-  height: 500px;
-}
+  --in-duration: 0.4s;
+  --in-delay: 0.1s;
+  --in-timing-function: ease-out;
 
-::ng-deep #chart-demo > .center {
-  text-align: center;
-}
-
-::ng-deep #chart-demo > .center > .dx-widget {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-#main {
+  width: calc( 3 * var(--offset) + var(--square));
+  height: calc( 2 * var(--offset) + var(--square));
+  padding: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 30px;
   position: relative;
-  height: 100vh;
-  overflow: hidden;
 }
 
+.loadingspinner div {
+  display: inline-block;
+  background: darkorange;
+  /*background: var(--text-color);*/
+  /*box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);*/
+  border: none;
+  border-radius: 2px;
+  width: var(--square);
+  height: var(--square);
+  position: absolute;
+  padding: 0px;
+  margin: 0px;
+  font-size: 6pt;
+  color: black;
+}
+
+.loadingspinner #square1 {
+  left: calc( 0 * var(--offset) );
+  top:  calc( 0 * var(--offset) );
+  animation: square1 var(--duration) var(--delay) var(--timing-function) infinite,
+             squarefadein var(--in-duration) calc(1 * var(--in-delay)) var(--in-timing-function) both;
+}
+
+.loadingspinner #square2 {
+  left: calc( 0 * var(--offset) );
+  top:  calc( 1 * var(--offset) );
+  animation: square2 var(--duration) var(--delay) var(--timing-function) infinite,
+            squarefadein var(--in-duration) calc(1 * var(--in-delay)) var(--in-timing-function) both;
+}
+
+.loadingspinner #square3 {
+  left: calc( 1 * var(--offset) );
+  top:  calc( 1 * var(--offset) );
+  animation: square3 var(--duration) var(--delay) var(--timing-function) infinite,
+             squarefadein var(--in-duration) calc(2 * var(--in-delay)) var(--in-timing-function) both;
+}
+
+.loadingspinner #square4 {
+  left: calc( 2 * var(--offset) );
+  top:  calc( 1 * var(--offset) );
+  animation: square4 var(--duration) var(--delay) var(--timing-function) infinite,
+             squarefadein var(--in-duration) calc(3 * var(--in-delay)) var(--in-timing-function) both;
+}
+
+.loadingspinner #square5 {
+  left: calc( 3 * var(--offset) );
+  top:  calc( 1 * var(--offset) );
+  animation: square5 var(--duration) var(--delay) var(--timing-function) infinite,
+             squarefadein var(--in-duration) calc(4 * var(--in-delay)) var(--in-timing-function) both;
+}
+
+@keyframes square1 {
+  0%      {left: calc( 0 * var(--offset) ); top: calc( 0 * var(--offset) ); }
+  8.333%  {left: calc( 0 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  100%    {left: calc( 0 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+}
+
+@keyframes square2 {
+  0%      {left: calc( 0 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  8.333%  {left: calc( 0 * var(--offset) ); top: calc( 2 * var(--offset) ); }
+  16.67%  {left: calc( 1 * var(--offset) ); top: calc( 2 * var(--offset) ); }
+  25.00%  {left: calc( 1 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  83.33%  {left: calc( 1 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  91.67%  {left: calc( 1 * var(--offset) ); top: calc( 0 * var(--offset) ); }
+  100%    {left: calc( 0 * var(--offset) ); top: calc( 0 * var(--offset) ); }
+}
+
+@keyframes square3 {
+  0%,100% {left: calc( 1 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  16.67%  {left: calc( 1 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  25.00%  {left: calc( 1 * var(--offset) ); top: calc( 0 * var(--offset) ); }
+  33.33%  {left: calc( 2 * var(--offset) ); top: calc( 0 * var(--offset) ); }
+  41.67%  {left: calc( 2 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  66.67%  {left: calc( 2 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  75.00%  {left: calc( 2 * var(--offset) ); top: calc( 2 * var(--offset) ); }
+  83.33%  {left: calc( 1 * var(--offset) ); top: calc( 2 * var(--offset) ); }
+  91.67%  {left: calc( 1 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+}
+
+@keyframes square4 {
+  0%      {left: calc( 2 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  33.33%  {left: calc( 2 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  41.67%  {left: calc( 2 * var(--offset) ); top: calc( 2 * var(--offset) ); }
+  50.00%  {left: calc( 3 * var(--offset) ); top: calc( 2 * var(--offset) ); }
+  58.33%  {left: calc( 3 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  100%    {left: calc( 3 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+}
+
+@keyframes square5 {
+  0%      {left: calc( 3 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  50.00%  {left: calc( 3 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  58.33%  {left: calc( 3 * var(--offset) ); top: calc( 0 * var(--offset) ); }
+  66.67%  {left: calc( 2 * var(--offset) ); top: calc( 0 * var(--offset) ); }
+  75.00%  {left: calc( 2 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+  100%    {left: calc( 2 * var(--offset) ); top: calc( 1 * var(--offset) ); }
+}
+
+@keyframes squarefadein {
+  0%      {transform: scale(0.75); opacity: 0.0;}
+  100%    {transform: scale(1.0); opacity: 1.0;}
+}

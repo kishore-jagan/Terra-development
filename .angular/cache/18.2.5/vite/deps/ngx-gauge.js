@@ -3,7 +3,7 @@ import {
   DecimalPipe,
   NgSwitch,
   NgSwitchCase
-} from "./chunk-LRWC3ZIY.js";
+} from "./chunk-3NW3MQWW.js";
 import {
   Component,
   ContentChild,
@@ -43,7 +43,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵviewQuery
-} from "./chunk-ZHMZCPY5.js";
+} from "./chunk-XJ4EH7TO.js";
 import "./chunk-T6SYERLG.js";
 
 // node_modules/ngx-gauge/fesm2022/ngx-gauge.mjs

@@ -2,15 +2,7 @@ import {
   BaseVector_default,
   GroupEvent,
   Group_default
-} from "./chunk-3ANMLR2Z.js";
-import {
-  CLASS_COLLAPSED,
-  CLASS_CONTROL,
-  CLASS_HIDDEN,
-  CLASS_UNSELECTABLE,
-  checkedFonts,
-  shared
-} from "./chunk-2KZMJ74E.js";
+} from "./chunk-XYYPEL2V.js";
 import {
   TileQueue_default,
   getTilePriority
@@ -24,25 +16,45 @@ import {
   Event_default as Event_default2,
   Layer_default,
   inView
-} from "./chunk-XX5D4D7N.js";
-import "./chunk-Z3DISOEB.js";
+} from "./chunk-6KPBXKF6.js";
 import {
   ViewHint_default,
   View_default,
   disable
-} from "./chunk-XSDCTEIZ.js";
+} from "./chunk-YKL57ABN.js";
+import "./chunk-Z3DISOEB.js";
 import {
   easeOut,
   linear
 } from "./chunk-XY5EX7MJ.js";
+import {
+  CLASS_COLLAPSED,
+  CLASS_CONTROL,
+  CLASS_HIDDEN,
+  CLASS_UNSELECTABLE,
+  checkedFonts,
+  shared
+} from "./chunk-IIV7BJXR.js";
+import "./chunk-NXAWT2XU.js";
+import {
+  DEVICE_PIXEL_RATIO,
+  FIREFOX,
+  MAC,
+  PASSIVE_EVENT_LISTENERS,
+  WEBKIT,
+  hasArea,
+  removeChildren,
+  replaceChildren,
+  replaceNode
+} from "./chunk-ZLXPRQ4U.js";
 import {
   Polygon_default,
   apply,
   compose,
   create,
   makeInverse
-} from "./chunk-ZLJ65ENQ.js";
-import "./chunk-OSSK4W5G.js";
+} from "./chunk-OTCK6WKK.js";
+import "./chunk-NRZEKP44.js";
 import {
   clone,
   createOrUpdateEmpty,
@@ -56,19 +68,7 @@ import {
   toUserCoordinate,
   warn,
   wrapX2 as wrapX
-} from "./chunk-JESYFB3Y.js";
-import "./chunk-NXAWT2XU.js";
-import {
-  DEVICE_PIXEL_RATIO,
-  FIREFOX,
-  MAC,
-  PASSIVE_EVENT_LISTENERS,
-  WEBKIT,
-  hasArea,
-  removeChildren,
-  replaceChildren,
-  replaceNode
-} from "./chunk-OT66HUJ6.js";
+} from "./chunk-RB4D37YD.js";
 import {
   Disposable_default,
   EventType_default,

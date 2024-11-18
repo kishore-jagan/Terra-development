@@ -1,5 +1,9 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
+  RouterLink,
+  RouterModule
+} from "./chunk-OGE6IR3E.js";
+import {
   Tooltip,
   TooltipModule
 } from "./chunk-YN4QXAFU.js";
@@ -16,11 +20,7 @@ import {
   SharedModule,
   UniqueComponentId
 } from "./chunk-2CMEQ6C6.js";
-import {
-  RouterLink,
-  RouterModule
-} from "./chunk-YKRYO4BZ.js";
-import "./chunk-ADAHCPRM.js";
+import "./chunk-CYEMHNJI.js";
 import {
   CommonModule,
   NgClass,
