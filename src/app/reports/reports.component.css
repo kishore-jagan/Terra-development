@@ -1,194 +1,335 @@
-/* main page */
-.reports-container {
-  background-color: black; /* Black background */
-  margin: 0;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100vh;
+.reports-container{
+    padding-left: 100px;
+    background-color: black;
+    display: flex;
 }
 
-/* reports-container */
-
-.table-container {
- background-color:#1e1e1e; /* Light grey background */
+/* Flex 1 */
+.filterContainer{
+  flex: 1.8; 
+  background-color: #1e1e1e;
   border-radius: 20px;
+  margin: 10px;
   padding: 20px;
-  width: 1700px;
-}
+  }
 
-/* side-nav */
+  .filterContainer h5{
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+    padding-bottom: 30px;
+  }
 
-mat-sidenav {
-  width: 300px; 
-  background-color: black;
-  color: white;
-  padding: 20px;
-}
+   .sensors{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .tide, .adcp{
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+    background-color: black;
+    box-shadow:  0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s color 0.3s;
+  }
+  svg{
+    height: 50px;
+    width: 50px;  
+  }
+ .sensors h1{
+    color: rgba(255, 255, 255, 0.775);
+    font-size: 16px;
+    font-weight: 500;
+  }  
+  .selectOption{
+    background-color: rgb(73, 104, 104);
+  }
 
-mat-sidenav-content {
- margin-left: 80px;
-}
+
+/* filter tide , filter ADCP */
+  .stations{
+    padding: 40px 20px 0px 20px; 
+    height: 100px;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+
+  }
+  .stations h3{
+    font-size: 22px;
+    font-weight: 400;
+  }
 
 
+/* Stations Field */
+  
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+  
+  .field label {
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: white;
+    padding-top: 10px;
+  }
+  
+  .field input, .field select{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+    font-size: 14px;
+  }
+  
+  .field input[type="date"], 
+  .field input[type="week"], 
+  .field input[type="month"], 
+  .field input[type="number"] {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .field select {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .field input[type="number"] {
+    max-width: 120px;
+  }
+  
+  
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: #888;
+  }
+
+
+
+
+
+
+  /* Flex-2 */
+.tableContainer {  
+    flex: 8.2;
+    background-color: #1e1e1e; /* Light grey background */
+    border-radius: 20px;
+    margin: 10px;
+    padding: 20px;
+  } 
+
+   label {
+    margin-bottom: 10px;
+    font-size: 28px;    
+    color: white;
+  }
+
+  
 
 /* Table */
 
-th,
-td {
-  padding: 12px;
+/* Apply background color for the whole table */
+::ng-deep .p-datatable {
+  /* background-color: #b92020 !important;  */
+  color: #fff !important; /* White text */
+  /* border-radius: 20px;
+  height: 100vh; */
+}
+
+::ng-deep .p-datatable-header {
+  background-color: #000 !important;
+  color: #fff !important;
+  /* border: none; */
+  border-color: #1ee1ff;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 30px 0px 30px 0px ;
+}
+
+  /* Caption Styling */
+.caption {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  gap: 10;
+}
+
+/* Search */
+input[type=search] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-family: inherit;
+	font-size: 100%;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button {
+	display: none; 
+}
+input[type=search] {
+	background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+	border: solid 1px #ccc;
+	padding: 9px 10px 9px 32px;
+	width: 55px;
+	
+	-webkit-border-radius: 10em;
+	-moz-border-radius: 10em;
+	border-radius: 10em;
+	
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+
+#search input[type=search] {
+	width: 15px;
+	padding-left: 10px;
+	color: transparent;
+	cursor: pointer;
+}
+#search input[type=search]:hover {
+	background-color: #fff;
+}
+#search input[type=search]:focus {
+	width: 100%;
+	padding-left: 32px;
+	color: #000;
+	background-color: #fff;
+	cursor: auto;
+  border: solid 1px #1e1e1e !important;
+  outline: none;
+  box-shadow: none;
+}
+
+#search input:-moz-placeholder {
+	color: transparent;
+}
+#search input::-webkit-input-placeholder {
+	color: transparent;
+}
+
+
+/* Button Styling */
+::ng-deep .p-button {
+  background-color: #ededed !important; /* Grey button background */
+  color: #000 !important; /* White text */
+}
+
+::ng-deep .p-button:hover {
+  background-color: #fff !important; /* Lighter grey on hover */
+}
+
+
+
+
+/* Apply styles to PrimeNG table components using ::ng-deep */
+::ng-deep .p-datatable-thead th {
+  background-color: #000 !important; /* Black header background */
+  color: #fff !important; /* White text */
+  border-bottom: 2px solid #1ee1ff;
   text-align: left;
-  border-bottom: 1px solid lightblue;
+  
 }
 
-th {
-  background-color: #333; 
-  color: white;
+::ng-deep .p-datatable-tbody td {
+  background-color: #000 !important; /* Black background for rows */
+  color: #fff !important; /* White text */
+  border-bottom: none; /* Light grey border for table rows */
+  text-align: left;
 }
 
+/* Styling Specific Data Values */
 .nan {
-    font-weight: 700;
-    color: #ff5252;
-    /* text-decoration: line-through; */
+  font-weight: 700;
+  color: #ff5252; /* Red for invalid values */
 }
 
 .low {
-    font-weight: 700;
-    color: #ffa726;
+  font-weight: 700;
+  color: #ffa726; /* Orange for low values */
 }
 
 .ok {
-    font-weight: 700;
-    color: #66bb6a;
+  font-weight: 700;
+  color: #66bb6a; /* Green for OK values */
 }
 
 
 
-/* dock */
+/* More specific targeting for the datatable footer */
+/* ::ng-deep .p-datatable .p-datatable-footer {
+  background-color: #000 !important; 
+  color: #fff !important; 
+} */
 
-:host ::ng-deep {
-  .dock-window {
-      width: 100%;
-      height: 450px;
-      position: relative;
-      background-image: url('https://primefaces.org/cdn/primeng/images/dock/window.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-  }
 
-  .p-dock {
-      z-index: 1000;
-  }
+/* Row hover effect */
+/* ::ng-deep .p-datatable-tbody tr:hover {
+  background-color: #e90b0b !important;
+} */
 
-  .dock-advanced {
-      .p-dialog-mask,
-      .p-toast {
-          position: absolute;
-      }
 
-      .p-dialog {
-          .p-dialog-header {
-              padding: .2rem;
-          }
-
-          .p-dialog-content {
-              padding: 0;
-          }
-
-          p {
-              margin-top: 0;
-          }
-
-          .p-terminal {
-              background-color: #212121;
-              color: #ffffff;
-              border: 0 none;
-              min-height: 18rem;
-              height: 100%;
-
-              .p-terminal-command {
-                  color: #80CBC4;
-              }
-
-              .p-terminal-prompt {
-                  color: #FFD54F;
-              }
-
-              .p-terminal-response {
-                  color: #9FA8DA;
-              }
-          }
-
-          .p-tree {
-              height: 100%;
-              border-radius: 0;
-              border-left-width: 0;
-              border-right-width: 0;
-              border-bottom-width: 0;
-          }
-      }
-
-      .p-toast {
-          top: 20px;
-      }
-  }
-
-  .p-menubar {
-      padding-top: 0;
-      padding-bottom: 0;
-      border-radius: 0;
-
-      .p-menuitem:first-child {
-          font-weight: bold;
-          padding: 0 1rem;
-      }
-
-      .p-menuitem-link {
-          padding: 0.5rem .75rem;
-      }
-
-      .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
-          padding: 0.5rem .75rem;
-
-          > .p-submenu-icon {
-              display: none;
-          }
-      }
-
-      .p-menubar-end {
-          span, i {
-              padding: 0 .75rem;
-          }
-      }
-  }
+/* Paginator Styling */
+::ng-deep .p-paginator {
+  background-color: #000 !important; /* Black background for paginator */
+  color: #fff !important; /* White text for paginator */
+  border-color: #1ee1ff;
+  border-radius: 0px 0px 20px 20px;
+  padding: 30px 20px 40px 20px;
+  /* margin: 0px 0px 30px 0px ; */
 }
 
-.dark-tooltip {
-  .p-tooltip {
-      .p-tooltip-arrow {
-          border-top-color: var(--surface-900);
-      }
+/* Pagination Buttons */
+::ng-deep .p-paginator .p-paginator-first, 
+::ng-deep .p-paginator .p-paginator-prev, 
+::ng-deep .p-paginator .p-paginator-next, 
+::ng-deep .p-paginator .p-paginator-last {
+  background-color: #555 !important; /* Button background */
+  color: #fff !important; /* White text */
+  margin: 2px;
+}
 
-      .p-tooltip-text {
-          background-color: var(--surface-900);
-      }
-  }
+::ng-deep .p-paginator .p-paginator-pages .p-highlight {
+  background-color: white !important; /* Highlighted page button */
+  color: black !important;
+}
+
+/* Striped Table Rows */
+::ng-deep .p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+  background-color: #158ddd !important; /* Slightly lighter black for striped rows */
+}
+
+/* Table */
+
+
+
+  /*Common CSS  */
+  /* button */
+
+  .submit{
+    height: 40px;
+    width: 130px;
+    border-radius: 15px;
+    background-color: rgb(0, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 65px;
+    
 }
 
 
-/* search icon */
-.p-inputgroup {
-    display: flex;
-    align-items: center;
-}
 
-.p-inputgroup-addon {
-    background-color: #f5f5f5; /* Adjust the background color if needed */
-}
-
-.ml-auto {
-    margin-left: auto;
-}
-/* search icon */

@@ -13,7 +13,58 @@ import {
   newParsingContext,
   parse,
   typeName
-} from "./chunk-3ANMLR2Z.js";
+} from "./chunk-XYYPEL2V.js";
+import {
+  ImageCanvas_default,
+  ImageLayer_default,
+  Image_default,
+  VectorEventType_default,
+  Vector_default,
+  fromResolutionLike
+} from "./chunk-INOCH76F.js";
+import "./chunk-W2VTVKH6.js";
+import {
+  Feature_default
+} from "./chunk-FCBGHDJ5.js";
+import {
+  Collection_default,
+  RBush
+} from "./chunk-H7FSCGDP.js";
+import {
+  BaseTile_default,
+  DataTile_default,
+  DataTile_default2,
+  Layer_default as Layer_default2,
+  Layer_default2 as Layer_default3,
+  TileLayer_default,
+  TileProperty_default,
+  Tile_default as Tile_default2,
+  ZIndexContext_default,
+  asArrayLike,
+  asImageLike,
+  canvasPool
+} from "./chunk-YC6NMSCJ.js";
+import {
+  ImageTile_default,
+  LRUCache_default,
+  TileRange_default,
+  Tile_default2 as Tile_default,
+  createOrUpdate2,
+  getKey
+} from "./chunk-EEB4OFHI.js";
+import {
+  EventType_default as EventType_default2,
+  Event_default,
+  Layer_default,
+  Property_default
+} from "./chunk-6KPBXKF6.js";
+import {
+  ViewHint_default
+} from "./chunk-YKL57ABN.js";
+import {
+  TileState_default
+} from "./chunk-Z3DISOEB.js";
+import "./chunk-XY5EX7MJ.js";
 import "./chunk-HM3IY3H4.js";
 import {
   Fill_default,
@@ -38,62 +89,21 @@ import {
   getTextDimensions,
   measureAndCacheTextWidth,
   registerFont
-} from "./chunk-2KZMJ74E.js";
+} from "./chunk-IIV7BJXR.js";
 import {
-  ImageCanvas_default,
-  ImageLayer_default,
-  Image_default,
-  VectorEventType_default,
-  Vector_default,
-  fromResolutionLike
-} from "./chunk-7OXIE3BX.js";
-import "./chunk-MOPBP7OF.js";
+  asArray
+} from "./chunk-NXAWT2XU.js";
 import {
-  BaseTile_default,
-  DataTile_default,
-  DataTile_default2,
-  Layer_default as Layer_default2,
-  Layer_default2 as Layer_default3,
-  TileLayer_default,
-  TileProperty_default,
-  Tile_default as Tile_default2,
-  ZIndexContext_default,
-  asArrayLike,
-  asImageLike,
-  canvasPool
-} from "./chunk-MSKOPHLF.js";
-import {
-  ImageTile_default,
-  LRUCache_default,
-  TileRange_default,
-  Tile_default2 as Tile_default,
-  createOrUpdate as createOrUpdate2,
-  getKey
-} from "./chunk-2ZV7UGAA.js";
-import {
-  Collection_default,
-  RBush
-} from "./chunk-H7FSCGDP.js";
-import {
-  EventType_default as EventType_default2,
-  Event_default,
-  Layer_default,
-  Property_default
-} from "./chunk-XX5D4D7N.js";
-import {
-  TileState_default
-} from "./chunk-Z3DISOEB.js";
-import {
-  Feature_default
-} from "./chunk-FCBGHDJ5.js";
+  ImageState_default,
+  SAFARI_BUG_237906,
+  createCanvasContext2D,
+  releaseCanvas,
+  toSize
+} from "./chunk-ZLXPRQ4U.js";
 import {
   LineString_default,
   lineStringLength
-} from "./chunk-N76SJY3Q.js";
-import {
-  ViewHint_default
-} from "./chunk-XSDCTEIZ.js";
-import "./chunk-XY5EX7MJ.js";
+} from "./chunk-UEO7C2R6.js";
 import {
   Point_default,
   apply,
@@ -113,8 +123,8 @@ import {
   transform2D,
   transformGeom2D,
   translate
-} from "./chunk-ZLJ65ENQ.js";
-import "./chunk-OSSK4W5G.js";
+} from "./chunk-OTCK6WKK.js";
+import "./chunk-NRZEKP44.js";
 import {
   Relationship_default,
   applyTransform,
@@ -149,17 +159,7 @@ import {
   toUserResolution,
   wrapX,
   wrapX2
-} from "./chunk-JESYFB3Y.js";
-import {
-  asArray
-} from "./chunk-NXAWT2XU.js";
-import {
-  ImageState_default,
-  SAFARI_BUG_237906,
-  createCanvasContext2D,
-  releaseCanvas,
-  toSize
-} from "./chunk-OT66HUJ6.js";
+} from "./chunk-RB4D37YD.js";
 import {
   Disposable_default,
   EventType_default,

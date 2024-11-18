@@ -1,130 +1,207 @@
-
-<!-- <mat-sidenav-container class="reports-container">    
-  <mat-sidenav  #sidenav mode="over" position="end">
-    <h3>Side Navigation</h3>
-    <p>This is the content inside the side navigation.</p>
-    <button mat-button (click)="sidenav.close()">Close</button>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-   <div class="table-container">
-    <div class="card">
-      <p-toolbar>
-      <div class="p-toolbar-group-start">
-          <p-button icon="pi pi-plus" class="mr-2"/>
-          <p-button icon="pi pi-print" class="mr-2"/>
-          <p-button icon="pi pi-upload" />
-      </div>
-      <div class="p-toolbar-group-center">
-          <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
-              <input pInputText placeholder="Search" />
-          </span>
-      </div>
-      <div class="p-toolbar-group-end">
-          <p-splitButton label="Save" icon="pi pi-check" />
-      </div>
-      </p-toolbar>
-      </div>
-      
-    <p-toolbar 
-    styleClass="bg-gray-900 shadow-2" 
-    [style]="{ 'border-radius': '3rem', 'background-image': 'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))' }">
-        <ng-template pTemplate="start">
-            <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" />
-        </ng-template>
-        <ng-template pTemplate="center">
-            <div class="flex flex-wrap align-items-center gap-3">
-                <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
-                    <i class="pi pi-home text-2xl"></i>
-                </button>
-                <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
-                    <i class="pi pi-user text-2xl"></i>
-                </button>
-                <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
-                    <i class="pi pi-search text-2xl"></i>
-                </button>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="end">
-            <div class="flex align-items-center gap-2">
-                <p-avatar 
-                    image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
-                    shape="circle" />
-                <span class="font-bold text-bluegray-50">
-                    Amy Elsner
-                </span>
-            </div>
-        </ng-template>
-</p-toolbar>
-    <p-table  
-    #dt1
-    [value]="paginatedData"
-    [paginator]="true"
-    [rows]="10"
-    [tableStyle]="{ 'min-width': '75rem' }"
-    [rowsPerPageOptions]="[10, 20]"
-    [globalFilterFields]="['id', 'staionName', 'date', 'time', 'temperature', 'waterLevel']" >
-    
-    <ng-template pTemplate="caption">
-      <div class="card flex flex-column md:flex-row md:justify-content-between row-gap-3">
-        <p-button label="Button 1"></p-button>
-        <p-button styleClass="p-button-secondary" label="Button 2"></p-button>
-        <p-button styleClass="p-button-help" label="Button 3"></p-button>
-    </div>
-      <div class="flex">
-          <p-iconField iconPosition="left" class="ml-auto">
-              <p-inputIcon>
-                  <i class="pi pi-search"></i>
-              </p-inputIcon>
-              <input 
-                  pInputText 
-                  type="text" 
-                  (input)="dt1.filterGlobal($any($event).target.value, 'contains')" 
-                  placeholder="Search keyword" />
-          </p-iconField>
-          <button mat-button (click)="sidenav.open()">Open Side Nav</button>
-      </div>
-  </ng-template>
-
-    <ng-template pTemplate="header">
-        <tr> 
-            <th pSortableColumn="id" style="width: 20%">ID <p-sortIcon field="id"/></th>
-            <th pSortableColumn="staionName" style="width: 20%">Station Name <p-sortIcon field="staionName"/></th>
-            <th pSortableColumn="date" style="width: 20%">Date <p-sortIcon field="date"/></th>
-            <th pSortableColumn="time" style="width: 20%">Time <p-sortIcon field="time"/></th>
-            <th pSortableColumn="temperature" style="width: 20%">Temperature <p-sortIcon field="temperature"/></th>
-            <th pSortableColumn="waterLevel" style="width: 30%">WaterLevel <p-sortIcon field="waterLevel"/></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-        <tr>
-          <td>{{ product.id }}</td> 
-          <td>{{product.staionName}}</td>
-            <td>{{ product.date }}</td>
-            <td>{{ product.time }}</td>
-            <td><div [ngClass]="{'nan': product.temperature <= 8, 'low':(product.temperature > 0 && product.temperature < 10), }">
-              {{ product.temperature }}
-            </div>
-              </td>
-            <td>{{ product.waterLevel }}</td>
-        </tr>
-    </ng-template>
-</p-table>
-  </div>
-  </mat-sidenav-content>    
-</mat-sidenav-container> -->
-
 <div class="reports-container">
-    <div class="card">
-        <p-table 
+
+    <div class="filterContainer">
+        <label><h5>Reports</h5></label>
+
+    <div class="sensors">
+      <div class="tide" [ngClass]="{'selectOption' :slectedOption === 'tide' }" (click)="selecteoption('tide')">
+        <svg id="Buoy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 101.22">
+          <defs>
+            <style>
+              .cls-1 {
+                fill: none;
+                stroke: #1ee1ff;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 8.23px;
+              }
+              .cls-2 {
+                fill: #1ff2f2;
+                stroke: #ffffff;
+                stroke-width: 2px;
+              }
+            </style>
+          </defs>
+          
+          <!-- Buoy base -->
+          <circle class="cls-2" cx="61.44" cy="75" r="15" />
+          
+          <!-- Buoy floating platform -->
+          <rect class="cls-2" x="55" y="55" width="12" height="25" />
+        
+          <!-- Water waves (simplified version of your original paths) -->
+          <path class="cls-1" d="M5.06,85c5,0,10,5,15,5s10-5,15-5 10,5,15,5 10-5,15-5 10,5,15,5 10-5,15-5 10,5,15,5 10-5,15-5" />
+          <path class="cls-1" d="M5.06,95c5,0,10,5,15,5s10-5,15-5 10,5,15,5 10-5,15-5 10,5,15,5 10-5,15-5 10,5,15,5 10-5,15-5" />
+          
+          <!-- Buoy pole/antenna -->
+          <line class="cls-1" x1="61.44" y1="30" x2="61.44" y2="55" />
+          <circle class="cls-2" cx="61.44" cy="25" r="5" />
+          
+        </svg>
+        
+        <h1>Buoy 1</h1>
+      </div>
+      <div class="adcp" [ngClass]="{'selectOption' :slectedOption === 'adcp' }" (click)="selecteoption('adcp')">
+        <svg id="Buoy" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 101.22">
+          <defs>
+            <style>
+              .cls-1 {
+                fill: none;
+                stroke: #1ee1ff;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-width: 8.23px;
+              }
+              .cls-2 {
+                fill: #1ff2f2;
+                stroke: #ffffff;
+                stroke-width: 2px;
+              }
+            </style>
+          </defs>
+          
+          <!-- Buoy base -->
+          <circle class="cls-2" cx="61.44" cy="75" r="15" />
+          
+          <!-- Buoy floating platform -->
+          <rect class="cls-2" x="55" y="55" width="12" height="25" />
+        
+          <!-- Water waves (simplified version of your original paths) -->
+          <path class="cls-1" d="M5.06,85c5,0,10,5,15,5s10-5,15-5 10,5,15,5 10-5,15-5 10,5,15,5 10-5,15-5 10,5,15,5 10-5,15-5" />
+          <path class="cls-1" d="M5.06,95c5,0,10,5,15,5s10-5,15-5 10,5,15,5 10-5,15-5 10,5,15,5 10-5,15-5 10,5,15,5 10-5,15-5" />
+          
+          <!-- Buoy pole/antenna -->
+          <line class="cls-1" x1="61.44" y1="30" x2="61.44" y2="55" />
+          <circle class="cls-2" cx="61.44" cy="25" r="5" />
+          
+        </svg>
+        <h1>Buoy 2</h1>
+      </div>
+    </div>
+   
+    @if(slectedOption == 'tide'){
+      <div class="stations">
+        <!-- <div class="field">
+          <label for="buoys"><h3>Station select</h3></label>
+          <p-multiSelect class="field custom-multiselect"
+              name="buoys"
+              [options]="bouyList" 
+              [(ngModel)]="selectedBuoy" 
+              optionLabel="name" 
+              placeholder="Select Buoys" 
+              [filter]="false"
+              ></p-multiSelect>
+      </div> -->
+    <!-- Period Selection Dropdown -->
+    <div class="field">
+    <label for="period"><h3>Range</h3></label>
+    <select name="period" [(ngModel)]="selectedPeriod" (change)="onPeriodChange()">
+      <option value="dateRange">Date Wise</option>
+      <option value="weekRange">Weekly</option>
+      <option value="monthRange">Monthly</option>
+      <option value="yearRange">Yearly</option>
+    </select>
+    </div>
+
+    
+    <!-- Conditional Fields based on Selected Period -->
+    <div  class="field" *ngIf="selectedPeriod === 'dateRange'">
+    <label for="fromDate">From Date:</label>
+    <input type="date" id="fromDate" [(ngModel)]="fromDate">
+    
+    <label for="toDate">To Date:</label>
+    <input type="date" id="toDate" [(ngModel)]="toDate">
+    </div>
+    
+    <div  class="field" *ngIf="selectedPeriod === 'weekRange'">
+    <label for="week">Select Week:</label>
+    <input type="week" id="week" [(ngModel)]="selectedWeek">
+    </div>
+    
+    <div  class="field" *ngIf="selectedPeriod === 'monthRange'">
+    <label for="month">Select Month:</label>
+    <input type="month" id="month" [(ngModel)]="selectedMonth">
+    </div>
+    
+    <div class="field" *ngIf="selectedPeriod === 'yearRange'">
+    <label for="year">Select Year:</label>
+    <input type="number" id="year" min="2023" max="2100" [(ngModel)]="selectedYear">
+    </div>
+
+    <div class="field">
+      <button class="submit">Submit</button> 
+    </div>
+    </div>
+
+    }@else if(slectedOption == 'adcp'){
+      <div class="stations">
+        <!-- <div class="field">
+          <label for="buoys"><h3>Station select</h3></label>
+          <p-multiSelect class="field custom-multiselect"
+              name="buoys"
+              [options]="bouyList" 
+              [(ngModel)]="selectedBuoy" 
+              optionLabel="name" 
+              placeholder="Select Buoys" 
+              [filter]="false"
+              
+              ></p-multiSelect>
+      </div> -->
+    
+    <!-- Period Selection Dropdown -->
+    <div class="field">
+    <label for="period"><h3>Range</h3></label>
+    <select name="period" [(ngModel)]="selectedPeriod" (change)="onPeriodChange()">
+      <option value="dateRange">Date Wise</option>
+      <option value="weekRange">Weekly</option>
+      <option value="monthRange">Monthly</option>
+      <option value="yearRange">Yearly</option>
+    </select>
+    </div>
+    
+    <!-- Conditional Fields based on Selected Period -->
+    <div  class="field" *ngIf="selectedPeriod === 'dateRange'">
+    <label for="fromDate">From Date:</label>
+    <input type="date" id="fromDate" [(ngModel)]="fromDate">
+    
+    <label for="toDate">To Date:</label>
+    <input type="date" id="toDate" [(ngModel)]="toDate">
+    </div>
+    
+    <div  class="field" *ngIf="selectedPeriod === 'weekRange'">
+    <label for="week">Select Week:</label>
+    <input type="week" id="week" [(ngModel)]="selectedWeek">
+    </div>
+    
+    <div  class="field" *ngIf="selectedPeriod === 'monthRange'">
+    <label for="month">Select Month:</label>
+    <input type="month" id="month" [(ngModel)]="selectedMonth">
+    </div>
+    
+    <div class="field" *ngIf="selectedPeriod === 'yearRange'">
+    <label for="year">Select Year:</label>
+    <input type="number" id="year" min="2023" max="2100" [(ngModel)]="selectedYear">
+    </div>
+    <div class="field">
+      <button class="submit">Submit</button> 
+    </div>
+    </div>
+    }
+    </div>
+
+
+
+
+  <div class="tableContainer" *ngIf="slectedOption === 'tide'">
+    <label><h5>Bouy 1</h5></label>
+    <p-table 
         rowHover="true"
         [columns]="_selectedColumns" 
         #dt2
         [exportHeader]="'customExportHeader'" 
         [loading]="loading"
-        [globalFilterFields]="['id', 'staionName', 'date', 'time', 'temperature', 'waterLevel']"
-        [value]="paginatedData" 
+        [globalFilterFields]="['id', 'staionName', 'date', 'time', 'waterLevel', 'surface', 'mid', 'low']"
+        [value]="firstBuoys" 
         paginator="true"
         [rows]="10"
         [rowsPerPageOptions]="[10, 25, 50]"
@@ -133,84 +210,148 @@
         [filterDelay]="0"
         [tableStyle]="{ 'min-width': '50rem' }"        
         responsiveLayout="stack" [breakpoint]="'960px'"
-        styleClass="p-datatable-striped" 
-        [tableStyle]="{ 'min-width': '50rem' }">
+        styleClass="p-datatable-striped">
 
         <ng-template pTemplate="caption">             
-            <div class="flex">
-                <!-- <p-iconField iconPosition="left" class="ml-auto">
-                    <p-inputIcon>
-                        <i class="pi pi-search"></i>
-                    </p-inputIcon>
-                    <input 
-                        pInputText 
-                        type="text" 
-                        (input)="dt2.filterGlobal($any($event).target.value, 'contains')" 
-                        placeholder="Search keyword" />
-                </p-iconField> -->
-
-                <div class="p-inputgroup ml-auto">
-                    <span class="p-inputgroup-addon">
-                        <i class="pi pi-search"></i>
-                    </span>
-                    <input 
-                        pInputText 
-                        type="text" 
-                        (input)="dt2.filterGlobal($any($event).target.value, 'contains')" 
-                        placeholder="Search keyword" 
-                        class="p-inputtext"/>
-
-                <p-multiSelect 
-                display="chip" 
-                [options]="cols" 
-                [(ngModel)]="selectedColumns" 
-                optionLabel="header"
-                selectedItemsLabel="{0} columns selected" 
-                [style]="{'min-width': '300px'}" 
-                placeholder="Choose Columns" />
-
-                <div style="text-align: left">
-                    <p-button 
+            <div class="caption">
+                <div id="search">
+                    <input type="search" placeholder="Search" (input)="dt2.filterGlobal($any($event).target.value, 'contains')" >
+                </div>
+                <div class="headerFilter">
+                    <p-multiSelect 
+                        [options]="cols" 
+                        [(ngModel)]="selectedColumns" 
+                        optionLabel="header"
+                        [filter]="false"
+                        selectedItemsLabel="{0} columns selected" 
+                        [style]="{'min-width': '300px'}" 
+                        placeholder="Choose Columns" />
+                    <p-button
                         icon="pi pi-external-link" 
                         label="Export" 
-                        (onClick)="exportCSV(dt2)" />
-                </div>
-
+                        (onClick)="exportCSV(dt2)"
+                        [style]="{'margin-left': '20px'}" />
                 </div>
             </div>
         </ng-template>
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-            <th pSortableColumn="id" style="width: 20%">ID <p-sortIcon field="id"/></th>
-            <th pSortableColumn="staionName" style="width: 20%">Station Name <p-sortIcon field="staionName"/></th>
-            <th pSortableColumn="date" style="width: 20%">Date <p-sortIcon field="date"/></th>
-            <th pSortableColumn="time" style="width: 20%">Time <p-sortIcon field="time"/></th>
-            <!-- <th pSortableColumn="temperature" style="width: 20%">Temperature <p-sortIcon field="temperature"/></th>
-            <th pSortableColumn="waterLevel" style="width: 30%">WaterLevel <p-sortIcon field="waterLevel"/></th> -->
-            <th *ngFor="let col of columns">{{col.header}}</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product let-columns="columns">
-                <tr>
-                    <td>{{ product.id }}</td> 
-                    <td>{{product.staionName}}</td>
-                      <td>{{ product.date }}</td>
-                      <td>{{ product.time }}</td>
-                      <td  *ngFor="let col of columns"><div [ngClass]="{'nan': product[col.field] <= 12 }">
-                        {{product[col.field]}}
-                      </div>
-                      </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="paginatorleft">
-                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" />
-            </ng-template>
-            <ng-template pTemplate="paginatorright">
-                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text" />
-            </ng-template>
-        </p-table>
-    </div>
+
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th pSortableColumn="id" style="width: 12.5%">ID <p-sortIcon field="id"/></th>
+                <th pSortableColumn="staionName" style="width: 12.5%">Station Name <p-sortIcon field="staionName"/></th>
+                <th pSortableColumn="date" style="width: 12.5%">Date <p-sortIcon field="date"/></th>
+                <th pSortableColumn="time" style="width: 12.5%">Time <p-sortIcon field="time"/></th>
+                <!-- <th pSortableColumn="waterLevel" style="width: 12.5%">Water Level <p-sortIcon field="waterLevel"/></th> -->
+                <!-- <th pSortableColumn="surface" style="width: 12.5%">Surface <p-sortIcon field="surface"/></th>
+                <th pSortableColumn="mid" style="width: 12.5%">Mid <p-sortIcon field="mid"/></th>
+                <th pSortableColumn="low" style="width: 12.5%">Low <p-sortIcon field="low"/></th> -->
+                <th *ngFor="let col of columns"pSortableColumn="{{col.field}}" style="width: 12.5%">
+                  {{col.header}} <p-sortIcon field="{{col.field}}"/>
+              </th>
+            </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-product let-columns="columns">
+            <tr>
+                <td>{{ product.id }}</td> 
+                <td>{{ product.staionName }}</td>
+                <td>{{ product.date }}</td>
+                <td>{{ product.time }}</td>
+                <!-- <td>{{ product.waterLevel }}</td> -->
+                <!-- <td>{{ product.surface }}</td>
+                <td>{{ product.mid }}</td>
+                <td>{{ product.low }}</td> -->
+                <td *ngFor="let col of columns"><div [ngClass]="{'nan': product[col.field] <= 0 }">
+                  {{product[col.field]}}
+                </div>
+              </td>
+            </tr>
+        </ng-template>
+        
+        <div class="tableFooter"></div>
+    </p-table>
 </div>
+
+<div class="tableContainer" *ngIf="slectedOption === 'adcp'">
+  <label><h5>Buoy 2</h5></label>
+  <p-table 
+      rowHover="true"
+      [columns]="_selectedColumns" 
+      #dt2
+      [exportHeader]="'customExportHeader'" 
+      [loading]="loading"
+      [globalFilterFields]="['id', 'staionName', 'date', 'time', 'waterLevel', 'surface', 'mid', 'low']"
+      [value]="secondBuoys" 
+      paginator="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      showCurrentPageReport="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [filterDelay]="0"
+      [tableStyle]="{ 'min-width': '50rem' }"        
+      responsiveLayout="stack" [breakpoint]="'960px'"
+      styleClass="p-datatable-striped">
+
+      <ng-template pTemplate="caption">             
+          <div class="caption">
+              <div id="search">
+                  <input type="search" placeholder="Search" (input)="dt2.filterGlobal($any($event).target.value, 'contains')" >
+              </div>
+              <div class="headerFilter">
+                  <p-multiSelect 
+                      [options]="cols" 
+                      [(ngModel)]="selectedColumns" 
+                      optionLabel="header"
+                      [filter]="false"
+                      selectedItemsLabel="{0} columns selected" 
+                      [style]="{'min-width': '300px'}" 
+                      placeholder="Choose Columns" />
+                  <p-button
+                      icon="pi pi-external-link" 
+                      label="Export" 
+                      (onClick)="exportCSV(dt2)"
+                      [style]="{'margin-left': '20px'}" />
+              </div>
+          </div>
+      </ng-template>
+
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+              <th pSortableColumn="id" style="width: 12.5%">ID <p-sortIcon field="id"/></th>
+              <th pSortableColumn="staionName" style="width: 12.5%">Station Name <p-sortIcon field="staionName"/></th>
+              <th pSortableColumn="date" style="width: 12.5%">Date <p-sortIcon field="date"/></th>
+              <th pSortableColumn="time" style="width: 12.5%">Time <p-sortIcon field="time"/></th>
+              <!-- <th pSortableColumn="waterLevel" style="width: 12.5%">Water Level <p-sortIcon field="waterLevel"/></th> -->
+              <!-- <th pSortableColumn="surface" style="width: 12.5%">Surface <p-sortIcon field="surface"/></th>
+              <th pSortableColumn="mid" style="width: 12.5%">Mid <p-sortIcon field="mid"/></th>
+              <th pSortableColumn="low" style="width: 12.5%">Low <p-sortIcon field="low"/></th> -->
+              <th *ngFor="let col of columns"pSortableColumn="{{col.field}}" style="width: 12.5%">
+                {{col.header}} <p-sortIcon field="{{col.field}}"/>
+            </th>
+          </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="body" let-product let-columns="columns">
+          <tr>
+              <td>{{ product.id }}</td> 
+              <td>{{ product.staionName }}</td>
+              <td>{{ product.date }}</td>
+              <td>{{ product.time }}</td>
+              <!-- <td>{{ product.waterLevel }}</td> -->
+              <!-- <td>{{ product.surface }}</td>
+              <td>{{ product.mid }}</td>
+              <td>{{ product.low }}</td> -->
+              <td *ngFor="let col of columns"><div [ngClass]="{'nan': product[col.field] <= 0 }">
+                {{product[col.field]}}
+              </div>
+            </td>
+          </tr>
+      </ng-template>
+      
+      <div class="tableFooter"></div>
+  </p-table>
+</div>
+  
 
 
 

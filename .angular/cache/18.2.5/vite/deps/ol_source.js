@@ -10,13 +10,6 @@ import {
 } from "./chunk-F5UGVMHI.js";
 import "./chunk-3C63TEGN.js";
 import {
-  ImageCanvas_default,
-  Image_default as Image_default2,
-  Vector_default,
-  fromResolutionLike,
-  loadFeaturesXhr
-} from "./chunk-7OXIE3BX.js";
-import {
   ATTRIBUTION,
   OSM_default,
   TileCache_default,
@@ -24,7 +17,7 @@ import {
   TileGrid_default,
   TileImage_default,
   TileSourceEvent,
-  Tile_default as Tile_default2,
+  Tile_default as Tile_default3,
   UrlTile_default,
   XYZ_default,
   appendParams,
@@ -37,15 +30,29 @@ import {
   nullTileUrlFunction,
   pickUrl,
   renderXYZTemplate
-} from "./chunk-MFLJMUVC.js";
+} from "./chunk-CDGWXOUI.js";
+import {
+  ImageCanvas_default,
+  Image_default as Image_default2,
+  Vector_default,
+  fromResolutionLike,
+  loadFeaturesXhr
+} from "./chunk-INOCH76F.js";
 import {
   Source_default
-} from "./chunk-MOPBP7OF.js";
+} from "./chunk-W2VTVKH6.js";
+import {
+  Feature_default
+} from "./chunk-FCBGHDJ5.js";
+import {
+  TileQueue_default
+} from "./chunk-6QPZE5GN.js";
+import "./chunk-H7FSCGDP.js";
 import {
   DataTile_default,
   DataTile_default2,
-  Tile_default as Tile_default3
-} from "./chunk-MSKOPHLF.js";
+  Tile_default as Tile_default2
+} from "./chunk-YC6NMSCJ.js";
 import {
   ERROR_THRESHOLD,
   ImageTile_default,
@@ -53,36 +60,39 @@ import {
   Tile_default,
   Triangulation_default,
   calculateSourceResolution,
-  createOrUpdate,
+  createOrUpdate2 as createOrUpdate,
   getCacheKeyForTileKey,
   getKeyZXY,
   hash,
   render
-} from "./chunk-2ZV7UGAA.js";
+} from "./chunk-EEB4OFHI.js";
+import "./chunk-6KPBXKF6.js";
 import {
-  TileQueue_default
-} from "./chunk-6QPZE5GN.js";
-import "./chunk-H7FSCGDP.js";
-import "./chunk-XX5D4D7N.js";
+  ViewHint_default
+} from "./chunk-YKL57ABN.js";
 import {
   TileState_default
 } from "./chunk-Z3DISOEB.js";
 import {
-  Feature_default
-} from "./chunk-FCBGHDJ5.js";
-import "./chunk-N76SJY3Q.js";
-import {
-  ViewHint_default
-} from "./chunk-XSDCTEIZ.js";
-import {
   DEFAULT_MAX_ZOOM,
   DEFAULT_TILE_SIZE
 } from "./chunk-XY5EX7MJ.js";
+import "./chunk-NXAWT2XU.js";
+import {
+  ImageState_default,
+  Image_default,
+  createCanvasContext2D,
+  decode,
+  releaseCanvas,
+  scale as scale2,
+  toSize
+} from "./chunk-ZLXPRQ4U.js";
+import "./chunk-UEO7C2R6.js";
 import {
   Point_default,
   create
-} from "./chunk-ZLJ65ENQ.js";
-import "./chunk-OSSK4W5G.js";
+} from "./chunk-OTCK6WKK.js";
+import "./chunk-NRZEKP44.js";
 import {
   Projection_default,
   add,
@@ -114,17 +124,7 @@ import {
   toUserCoordinate,
   toUserExtent,
   transform
-} from "./chunk-JESYFB3Y.js";
-import "./chunk-NXAWT2XU.js";
-import {
-  ImageState_default,
-  Image_default,
-  createCanvasContext2D,
-  decode,
-  releaseCanvas,
-  scale as scale2,
-  toSize
-} from "./chunk-OT66HUJ6.js";
+} from "./chunk-RB4D37YD.js";
 import {
   Disposable_default,
   EventType_default,
@@ -833,7 +833,7 @@ var Cluster = class extends Vector_default {
 var Cluster_default = Cluster;
 
 // node_modules/ol/source/DataTile.js
-var DataTileSource = class extends Tile_default2 {
+var DataTileSource = class extends Tile_default3 {
   /**
    * @param {Options} options DataTile source options.
    */
@@ -9150,8 +9150,8 @@ function createLayers(sources) {
 function createLayer(layerOrSource) {
   let layer;
   if (layerOrSource instanceof Source_default) {
-    if (layerOrSource instanceof Tile_default2) {
-      layer = new Tile_default3({
+    if (layerOrSource instanceof Tile_default3) {
+      layer = new Tile_default2({
         source: layerOrSource
       });
     } else if (layerOrSource instanceof Image_default4) {
@@ -9951,7 +9951,7 @@ var CustomTile2 = class extends Tile_default {
     }
   }
 };
-var UTFGrid = class extends Tile_default2 {
+var UTFGrid = class extends Tile_default3 {
   /**
    * @param {Options} options Source options.
    */
@@ -10365,7 +10365,7 @@ export {
   Raster_default as Raster,
   Source_default as Source,
   StadiaMaps_default as StadiaMaps,
-  Tile_default2 as Tile,
+  Tile_default3 as Tile,
   TileArcGISRest_default as TileArcGISRest,
   TileDebug_default as TileDebug,
   TileImage_default as TileImage,

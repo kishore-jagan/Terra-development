@@ -9,6 +9,15 @@ import {
   TimesIcon
 } from "./chunk-WC2V35IU.js";
 import {
+  animate,
+  animateChild,
+  query,
+  state,
+  style,
+  transition,
+  trigger
+} from "./chunk-2YZBZH3N.js";
+import {
   BaseIcon
 } from "./chunk-B6RJVQYU.js";
 import {
@@ -27,15 +36,6 @@ import {
   UniqueComponentId,
   zindexutils
 } from "./chunk-2CMEQ6C6.js";
-import {
-  animate,
-  animateChild,
-  query,
-  state,
-  style,
-  transition,
-  trigger
-} from "./chunk-5NUNCZFO.js";
 import {
   CommonModule,
   DOCUMENT,

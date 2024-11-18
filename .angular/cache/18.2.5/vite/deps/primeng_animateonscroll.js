@@ -5,7 +5,7 @@ import {
   CommonModule,
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-LRWC3ZIY.js";
+} from "./chunk-3NW3MQWW.js";
 import {
   Directive,
   ElementRef,
@@ -23,7 +23,7 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵdirectiveInject
-} from "./chunk-ZHMZCPY5.js";
+} from "./chunk-XJ4EH7TO.js";
 import {
   __spreadProps,
   __spreadValues

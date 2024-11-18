@@ -1,23 +1,29 @@
 import {
   ChevronLeftIcon
-} from "./chunk-7ZDOV53T.js";
+} from "./chunk-JKLHWI5J.js";
 import {
   ChevronRightIcon
-} from "./chunk-OSMNPO6I.js";
+} from "./chunk-VIFYGB2E.js";
 import {
   FocusTrap,
   FocusTrapModule,
   WindowMaximizeIcon,
   WindowMinimizeIcon
-} from "./chunk-PLXC3D3F.js";
+} from "./chunk-TTKDYUKF.js";
 import {
   TimesIcon
-} from "./chunk-4J4LXPQ4.js";
-import "./chunk-CVH56IWX.js";
+} from "./chunk-QARP5UBV.js";
+import {
+  animate,
+  style,
+  transition,
+  trigger
+} from "./chunk-2K2NILN5.js";
+import "./chunk-3C2PJN3G.js";
 import {
   Ripple,
   RippleModule
-} from "./chunk-O3TSPZGF.js";
+} from "./chunk-BF3FBC6V.js";
 import {
   DomHandler
 } from "./chunk-QU7AFVGG.js";
@@ -27,13 +33,7 @@ import {
   SharedModule,
   UniqueComponentId,
   zindexutils
-} from "./chunk-4CPUO5RO.js";
-import {
-  animate,
-  style,
-  transition,
-  trigger
-} from "./chunk-VFN32GDI.js";
+} from "./chunk-S3TJJSNJ.js";
 import {
   CommonModule,
   DOCUMENT,
@@ -43,7 +43,7 @@ import {
   NgStyle,
   NgTemplateOutlet,
   isPlatformBrowser
-} from "./chunk-LRWC3ZIY.js";
+} from "./chunk-3NW3MQWW.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -99,7 +99,7 @@ import {
   ɵɵtemplate,
   ɵɵtemplateRefExtractor,
   ɵɵviewQuery
-} from "./chunk-ZHMZCPY5.js";
+} from "./chunk-XJ4EH7TO.js";
 import "./chunk-T6SYERLG.js";
 
 // node_modules/primeng/fesm2022/primeng-galleria.mjs
