@@ -1,0 +1,220 @@
+
+<!-- <mat-sidenav-container class="reports-container">    
+  <mat-sidenav  #sidenav mode="over" position="end">
+    <h3>Side Navigation</h3>
+    <p>This is the content inside the side navigation.</p>
+    <button mat-button (click)="sidenav.close()">Close</button>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+   <div class="table-container">
+    <div class="card">
+      <p-toolbar>
+      <div class="p-toolbar-group-start">
+          <p-button icon="pi pi-plus" class="mr-2"/>
+          <p-button icon="pi pi-print" class="mr-2"/>
+          <p-button icon="pi pi-upload" />
+      </div>
+      <div class="p-toolbar-group-center">
+          <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText placeholder="Search" />
+          </span>
+      </div>
+      <div class="p-toolbar-group-end">
+          <p-splitButton label="Save" icon="pi pi-check" />
+      </div>
+      </p-toolbar>
+      </div>
+      
+    <p-toolbar 
+    styleClass="bg-gray-900 shadow-2" 
+    [style]="{ 'border-radius': '3rem', 'background-image': 'linear-gradient(to right, var(--bluegray-500), var(--bluegray-800))' }">
+        <ng-template pTemplate="start">
+            <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" />
+        </ng-template>
+        <ng-template pTemplate="center">
+            <div class="flex flex-wrap align-items-center gap-3">
+                <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
+                    <i class="pi pi-home text-2xl"></i>
+                </button>
+                <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
+                    <i class="pi pi-user text-2xl"></i>
+                </button>
+                <button class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200">
+                    <i class="pi pi-search text-2xl"></i>
+                </button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="end">
+            <div class="flex align-items-center gap-2">
+                <p-avatar 
+                    image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
+                    shape="circle" />
+                <span class="font-bold text-bluegray-50">
+                    Amy Elsner
+                </span>
+            </div>
+        </ng-template>
+</p-toolbar>
+    <p-table  
+    #dt1
+    [value]="paginatedData"
+    [paginator]="true"
+    [rows]="10"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [rowsPerPageOptions]="[10, 20]"
+    [globalFilterFields]="['id', 'staionName', 'date', 'time', 'temperature', 'waterLevel']" >
+    
+    <ng-template pTemplate="caption">
+      <div class="card flex flex-column md:flex-row md:justify-content-between row-gap-3">
+        <p-button label="Button 1"></p-button>
+        <p-button styleClass="p-button-secondary" label="Button 2"></p-button>
+        <p-button styleClass="p-button-help" label="Button 3"></p-button>
+    </div>
+      <div class="flex">
+          <p-iconField iconPosition="left" class="ml-auto">
+              <p-inputIcon>
+                  <i class="pi pi-search"></i>
+              </p-inputIcon>
+              <input 
+                  pInputText 
+                  type="text" 
+                  (input)="dt1.filterGlobal($any($event).target.value, 'contains')" 
+                  placeholder="Search keyword" />
+          </p-iconField>
+          <button mat-button (click)="sidenav.open()">Open Side Nav</button>
+      </div>
+  </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr> 
+            <th pSortableColumn="id" style="width: 20%">ID <p-sortIcon field="id"/></th>
+            <th pSortableColumn="staionName" style="width: 20%">Station Name <p-sortIcon field="staionName"/></th>
+            <th pSortableColumn="date" style="width: 20%">Date <p-sortIcon field="date"/></th>
+            <th pSortableColumn="time" style="width: 20%">Time <p-sortIcon field="time"/></th>
+            <th pSortableColumn="temperature" style="width: 20%">Temperature <p-sortIcon field="temperature"/></th>
+            <th pSortableColumn="waterLevel" style="width: 30%">WaterLevel <p-sortIcon field="waterLevel"/></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{ product.id }}</td> 
+          <td>{{product.staionName}}</td>
+            <td>{{ product.date }}</td>
+            <td>{{ product.time }}</td>
+            <td><div [ngClass]="{'nan': product.temperature <= 8, 'low':(product.temperature > 0 && product.temperature < 10), }">
+              {{ product.temperature }}
+            </div>
+              </td>
+            <td>{{ product.waterLevel }}</td>
+        </tr>
+    </ng-template>
+</p-table>
+  </div>
+  </mat-sidenav-content>    
+</mat-sidenav-container> -->
+
+<div class="reports-container">
+    <div class="card">
+        <p-table 
+        rowHover="true"
+        [columns]="_selectedColumns" 
+        #dt2
+        [exportHeader]="'customExportHeader'" 
+        [loading]="loading"
+        [globalFilterFields]="['id', 'staionName', 'date', 'time', 'temperature', 'waterLevel']"
+        [value]="paginatedData" 
+        paginator="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        showCurrentPageReport="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [filterDelay]="0"
+        [tableStyle]="{ 'min-width': '50rem' }"        
+        responsiveLayout="stack" [breakpoint]="'960px'"
+        styleClass="p-datatable-striped" 
+        [tableStyle]="{ 'min-width': '50rem' }">
+
+        <ng-template pTemplate="caption">             
+            <div class="flex">
+                <!-- <p-iconField iconPosition="left" class="ml-auto">
+                    <p-inputIcon>
+                        <i class="pi pi-search"></i>
+                    </p-inputIcon>
+                    <input 
+                        pInputText 
+                        type="text" 
+                        (input)="dt2.filterGlobal($any($event).target.value, 'contains')" 
+                        placeholder="Search keyword" />
+                </p-iconField> -->
+
+                <div class="p-inputgroup ml-auto">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-search"></i>
+                    </span>
+                    <input 
+                        pInputText 
+                        type="text" 
+                        (input)="dt2.filterGlobal($any($event).target.value, 'contains')" 
+                        placeholder="Search keyword" 
+                        class="p-inputtext"/>
+
+                <p-multiSelect 
+                display="chip" 
+                [options]="cols" 
+                [(ngModel)]="selectedColumns" 
+                optionLabel="header"
+                selectedItemsLabel="{0} columns selected" 
+                [style]="{'min-width': '300px'}" 
+                placeholder="Choose Columns" />
+
+                <div style="text-align: left">
+                    <p-button 
+                        icon="pi pi-external-link" 
+                        label="Export" 
+                        (onClick)="exportCSV(dt2)" />
+                </div>
+
+                </div>
+            </div>
+        </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+            <th pSortableColumn="id" style="width: 20%">ID <p-sortIcon field="id"/></th>
+            <th pSortableColumn="staionName" style="width: 20%">Station Name <p-sortIcon field="staionName"/></th>
+            <th pSortableColumn="date" style="width: 20%">Date <p-sortIcon field="date"/></th>
+            <th pSortableColumn="time" style="width: 20%">Time <p-sortIcon field="time"/></th>
+            <!-- <th pSortableColumn="temperature" style="width: 20%">Temperature <p-sortIcon field="temperature"/></th>
+            <th pSortableColumn="waterLevel" style="width: 30%">WaterLevel <p-sortIcon field="waterLevel"/></th> -->
+            <th *ngFor="let col of columns">{{col.header}}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-columns="columns">
+                <tr>
+                    <td>{{ product.id }}</td> 
+                    <td>{{product.staionName}}</td>
+                      <td>{{ product.date }}</td>
+                      <td>{{ product.time }}</td>
+                      <td  *ngFor="let col of columns"><div [ngClass]="{'nan': product[col.field] <= 12 }">
+                        {{product[col.field]}}
+                      </div>
+                      </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" />
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text" />
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+
+
+
+
+
+

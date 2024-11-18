@@ -1,0 +1,9 @@
+{
+  "routes": [
+    "/main",
+    "/main/analytics",
+    "/main/dashboard",
+    "/main/home",
+    "/main/report"
+  ]
+}

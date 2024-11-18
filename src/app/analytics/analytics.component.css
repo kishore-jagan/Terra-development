@@ -1,0 +1,92 @@
+.analytics-container {
+  background-color: black; /* Black background */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.chartsContainer {
+  display: grid;
+  flex-wrap: wrap;
+  grid-template-columns: 1fr 1fr; /* Two charts in a row */
+  grid-gap: 50px; /* Gap between chart containers */
+  justify-content: center;
+  align-items: center;
+  background-color: #1e1e1e; /* Light grey background */
+  border-radius: 20px;
+  /* margin: 80px; */
+  padding: 20px;
+  width: 1700px;
+}
+
+.chartContainer {
+  /* background-color: #1e1e1e;   */
+  /* width: 100%;  */
+  background-color: black;
+  padding: 20px;
+  border-radius: 8px;
+  /* box-shadow: 0 2px 5px rgb(0, 0, 0, 0.1);
+  border: 1px solid #ccc; */
+  /* max-width: 500px;   */
+ }
+
+/* Make the third chart span the entire row */
+/* .chartContainer:nth-child(3) {
+  grid-column: 1 / -1; /* Span across the full width in a single row */
+/* }  */
+
+mat-sidenav {
+  width: 300px; 
+  background-color: black;
+  color: white;
+  padding: 20px;
+}
+
+mat-sidenav-content {
+ margin-left: 80px;
+}
+
+/* Style the button as a filter icon and position in the right corner */
+/* .button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: white;
+  margin-bottom: 20px;
+} */
+
+
+
+::ng-deep #chart-demo {
+  height: 600px;
+}
+
+::ng-deep #radarChart {
+  height: 500px;
+}
+
+::ng-deep #chart-demo > .center {
+  text-align: center;
+}
+
+::ng-deep #chart-demo > .center > .dx-widget {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+#main {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+

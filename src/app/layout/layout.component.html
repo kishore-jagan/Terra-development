@@ -1,0 +1,18 @@
+<div class="maindiv">
+    <app-sidenav></app-sidenav>
+    <section>
+        <!-- <app-home></app-home> -->
+        @if(page == 'Home'){
+        <app-home></app-home>
+        }@else if (page == 'Dashboard') {
+        <app-dashboard></app-dashboard>
+        }@else if (page == 'Reports') {
+        <app-reports></app-reports>
+        }
+        @else if (page == 'Analytics') {
+        <app-analytics></app-analytics>
+        }@else {
+        <app-home></app-home>
+        }
+    </section>
+</div>

@@ -1,0 +1,158 @@
+/* .dashDiv {
+  margin: 5%;
+  padding-left: 9%;
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  flex-direction: column; 
+}
+
+.chart1 {
+  background-color: aqua;
+  width: 350px; 
+  height: 300px; 
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px grey;
+}
+
+ag-charts {
+  display: flex;
+  border-radius: 25px;
+  width: 100%;
+  height: 100%; 
+}
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.battery-chart,
+.gauge,
+.time-display,
+.coordinates,
+.status {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.metrics {
+  display: flex;
+  justify-content: space-between;
+}
+
+.time-display {
+  font-size: 2em;
+  text-align: center;
+}
+
+.coordinates,
+.status {
+  display: flex;
+  justify-content: space-around;
+}
+
+.fuel-level,
+.battery-level {
+  margin-top: 10px;
+} */
+
+
+
+.dock-window {
+  width: 100%;
+  height: 450px;
+  position: relative;
+  background-image: url('https://primefaces.org/cdn/primeng/images/dock/window.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.p-dock {
+  z-index: 1000;
+}
+
+:host {
+  @keyframes slidedown-icon {
+      0% {
+          transform: translateY(0);
+      }
+
+      50% {
+          transform: translateY(20px);
+      }
+
+      100% {
+          transform: translateY(0);
+      }
+  }
+
+  .slidedown-icon {
+      animation: slidedown-icon;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+  }
+
+  .box {
+      background-image: radial-gradient(var(--primary-300), var(--primary-600));
+      border-radius: 50% !important;
+      color: var(--primary-color-text);
+  }
+}
+
+
+
+.fadein {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.fadeout {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+  }
+}
+
+/* Define similar animations for fadeinleft, fadeoutright, etc. */
+
+.slidedown-icon {
+  animation: slidedown-icon 3s infinite;
+}
+
+.animation-duration-1000 {
+  animation-duration: 1000ms;
+}
+
+.animation-ease-in-out {
+  animation-timing-function: ease-in-out;
+}
+
+.box {
+  background-image: radial-gradient(#abc123, #789456); /* Replace with actual color values */
+  border-radius: 50%;
+  color: #fff;
+}

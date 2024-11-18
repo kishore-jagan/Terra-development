@@ -1,0 +1,127 @@
+
+<mat-sidenav-container class="analytics-container">
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav mode="over" position="end">
+    <h3>Side Navigation</h3>
+    <p>This is the content inside the side navigation.</p>
+    <div>
+      <!-- <p-dropdown 
+    [options]="cities" 
+    [(ngModel)]="selectedCity" 
+    [filter]="true"
+    optionLabel="name" 
+    placeholder="Select a City" /> -->
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-select [(ngModel)]="selectedBuoy" >
+          <mat-option *ngFor="let buoy of buoys" [value]="buoy">{{ buoy }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-select [(ngModel)]="selectedDateOption">
+      <mat-option *ngFor="let dateOption of dateOptions" [value]="dateOption">{{ dateOption }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+   <!-- Show fields based on selectedDateOption -->
+    <!-- Date Range Option -->
+    <div *ngIf="selectedDateOption === 'Date Range'">
+      <mat-form-field appearance="fill">
+        <input matInput [matDatepicker]="fromPicker" placeholder="From Date" [(ngModel)]="fromDate">
+        <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input matInput [matDatepicker]="toPicker" placeholder="To Date" [(ngModel)]="toDate">
+        <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Weekly Option -->
+    <div *ngIf="selectedDateOption === 'Weekly'">
+      <p>Last 7 days selected</p>
+      <p>From: {{ fromDate | date }} To: {{ toDate | date }}</p>
+    </div>
+
+    <!-- Monthly Option -->
+    <div *ngIf="selectedDateOption === 'Monthly'">
+      <mat-form-field appearance="fill">
+        <input matInput [matDatepicker]="monthPicker" placeholder="Select Month" [(ngModel)]="selectedMonth">
+        <mat-datepicker-toggle matSuffix [for]="monthPicker"></mat-datepicker-toggle>
+        <mat-datepicker #monthPicker startView="multi-year" (monthSelected)="monthPicker.close()" panelClass="example-month-picker"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Yearly Option -->
+    <div *ngIf="selectedDateOption === 'Yearly'">
+      <mat-form-field appearance="fill">
+        <input matInput [matDatepicker]="yearPicker" placeholder="Select Year" [(ngModel)]="selectedYear">
+        <mat-datepicker-toggle matSuffix [for]="yearPicker"></mat-datepicker-toggle>
+        <mat-datepicker #yearPicker startView="multi-year" (yearSelected)="yearPicker.close()"></mat-datepicker>
+      </mat-form-field>
+    </div>
+    
+    <button mat-button (click)="sidenav.close()">Close</button>
+  </mat-sidenav>
+
+  <!-- Main content -->
+   
+   
+  <mat-sidenav-content>   
+   
+    <!-- Existing chart layout -->
+     <div class="button">
+    <button mat-button (click)="sidenav.open()">Open Side Nav</button>
+    <button mat-icon-button (click)="sidenav.open()">
+      <mat-icon>filter_list</mat-icon> <!-- Filter icon -->  
+  </button>
+</div>
+
+
+
+  <div class="chartsContainer">      
+    <div class="chartContainer">
+      <div id="main" style="width: 100%; height: 400px;"></div>
+    </div>
+
+    <div class="chartContainer">
+      <div id="chart123" style="width: 100%;height: 400px;"></div>
+    </div>
+
+    <div class="chartContainer">
+      <div id="largeAreaChart" style="width: 100%; height: 400px;"></div>
+    </div>
+
+    <div class="chartContainer">
+      <div #chart style="width: 100%; height: 400px;"></div>
+    </div>
+
+      <div class="chartContainer">
+        <canvasjs-chart [options]="chartOptions" style="width: 100%; height: 400px;"></canvasjs-chart>
+      </div>
+
+      <div class="chartContainer">
+        <div id="chart" style="width: 100%; height: 400px;"></div>
+      </div>
+
+      <div class="chartContainer">
+        <div id="chart2" style="height: 400px; width: 100%;"></div>
+      </div>
+      
+    </div>
+
+    <!-- <div class="dock-window">
+      <p-dock [model]="items" [position]="'top'">
+          <ng-template pTemplate="item" let-item>
+              <img [src]="item.icon" [alt]="item.label" width="100%" />
+          </ng-template>
+      </p-dock>
+  </div> -->
+
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>
+
+
+
