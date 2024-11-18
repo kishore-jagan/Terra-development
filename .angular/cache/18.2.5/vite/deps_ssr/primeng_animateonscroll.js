@@ -6,7 +6,7 @@ import {
   CommonModule,
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-IK6FRGZM.js";
+} from "./chunk-H4TAJNWD.js";
 import {
   Directive,
   ElementRef,
@@ -24,11 +24,14 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵdirectiveInject
-} from "./chunk-QVGEF4EQ.js";
+} from "./chunk-6LO2F3Z6.js";
+import "./chunk-DS3ZS4IA.js";
+import "./chunk-LEOSHXMA.js";
+import "./chunk-G4WBR3IQ.js";
 import {
   __spreadProps,
   __spreadValues
-} from "./chunk-K57UEZGG.js";
+} from "./chunk-FQORKCB4.js";
 
 // node_modules/primeng/fesm2022/primeng-animateonscroll.mjs
 var AnimateOnScroll = class _AnimateOnScroll {

@@ -9,18 +9,21 @@
   flex: 1.8; 
   background-color: #1e1e1e;
   border-radius: 20px;
-  margin: 10px;
+  margin: 0px 5px 0px 5px;
   padding: 20px;
+  position: sticky; 
+  width: 250px;
+  top: 0; 
+  height: 100vh;
   }
-
+  
   .filterContainer h5{
     color: white;
     font-size: 28px;
     font-weight: 600;
     padding-bottom: 30px;
   }
-
-   .sensors{
+   .stationsselect{
     height: 100px;
     width: 100%;
     display: flex;
@@ -28,7 +31,7 @@
     justify-content: space-evenly;
     align-items: center;
   }
-  .tide, .adcp{
+  .cwprs1, .cwprs2{
     height: 100px;
     width: 100px;
     border-radius: 10px;
@@ -45,7 +48,7 @@
     height: 50px;
     width: 50px;  
   }
- .sensors h1{
+ .stationsselect h1{
     color: rgba(255, 255, 255, 0.775);
     font-size: 16px;
     font-weight: 500;
@@ -57,7 +60,7 @@
 
 /* filter tide , filter ADCP */
   .stations{
-    padding: 40px 20px 0px 20px; 
+    padding: 60px 20px 0px 20px; 
     height: 100px;
     width: 100%;
     color: white;
@@ -72,11 +75,12 @@
 
 
 /* Stations Field */
-  
+
   .field {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    width: 100%;
   }
   
   .field label {
@@ -85,38 +89,23 @@
     color: white;
     padding-top: 10px;
   }
-  
-  .field input, .field select{
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #444;
-    background-color: #333;
+
+  .full-width{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .full-width label{
+    margin-bottom: 5px;
+    font-size: 18px;
     color: white;
-    font-size: 14px;
+    padding-top: 10px;
   }
+
+
   
-  .field input[type="date"], 
-  .field input[type="week"], 
-  .field input[type="month"], 
-  .field input[type="number"] {
-    width: 100%;
-    max-width: 250px;
-  }
-  
-  .field select {
-    width: 100%;
-    max-width: 250px;
-  }
-  
-  .field input[type="number"] {
-    max-width: 120px;
-  }
-  
-  
-  .field input:focus, .field select:focus {
-    outline: none;
-    border-color: #888;
-  }
+ 
 
 
 
@@ -128,7 +117,7 @@
     flex: 8.2;
     background-color: #1e1e1e; /* Light grey background */
     border-radius: 20px;
-    margin: 10px;
+    margin: 0px 10px 0px 10px;
     padding: 20px;
   } 
 
@@ -139,21 +128,16 @@
   }
 
   
-
 /* Table */
 
 /* Apply background color for the whole table */
 ::ng-deep .p-datatable {
-  /* background-color: #b92020 !important;  */
-  color: #fff !important; /* White text */
-  /* border-radius: 20px;
-  height: 100vh; */
+  color: #fff !important;
 }
 
 ::ng-deep .p-datatable-header {
   background-color: #000 !important;
   color: #fff !important;
-  /* border: none; */
   border-color: #1ee1ff;
   border-radius: 20px;
   padding: 20px;
@@ -233,8 +217,6 @@ input[type=search] {
 }
 
 
-
-
 /* Apply styles to PrimeNG table components using ::ng-deep */
 ::ng-deep .p-datatable-thead th {
   background-color: #000 !important; /* Black header background */
@@ -307,11 +289,6 @@ input[type=search] {
   color: black !important;
 }
 
-/* Striped Table Rows */
-::ng-deep .p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
-  background-color: #158ddd !important; /* Slightly lighter black for striped rows */
-}
-
 /* Table */
 
 
@@ -326,7 +303,7 @@ input[type=search] {
     background-color: rgb(0, 255, 255);
     color: rgb(0, 0, 0);
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 60px;
     margin-left: 65px;
     
 }

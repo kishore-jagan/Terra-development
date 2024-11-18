@@ -1,9 +1,17 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
+  TileQueue_default,
+  getTilePriority
+} from "./chunk-O4DZZZD7.js";
+import {
   BaseVector_default,
   GroupEvent,
   Group_default
-} from "./chunk-64UUAQWD.js";
+} from "./chunk-XKZVWJKN.js";
+import {
+  CollectionEventType_default,
+  Collection_default
+} from "./chunk-DVLLPZGU.js";
 import {
   CLASS_COLLAPSED,
   CLASS_CONTROL,
@@ -11,35 +19,24 @@ import {
   CLASS_UNSELECTABLE,
   checkedFonts,
   shared
-} from "./chunk-XC3LSDK7.js";
-import {
-  TileQueue_default,
-  getTilePriority
-} from "./chunk-O4DZZZD7.js";
-import {
-  CollectionEventType_default,
-  Collection_default
-} from "./chunk-DVLLPZGU.js";
+} from "./chunk-NIPGOBUD.js";
 import {
   EventType_default as EventType_default2,
   Event_default as Event_default2,
   Layer_default,
   inView
-} from "./chunk-YESSAJTU.js";
-import "./chunk-RPUO66UY.js";
+} from "./chunk-D7HHOKR2.js";
 import {
   ViewHint_default,
   View_default,
   disable
-} from "./chunk-3C6YG5TE.js";
-import {
-  Polygon_default,
-  apply,
-  compose,
-  create,
-  makeInverse
-} from "./chunk-CCD7OK2A.js";
+} from "./chunk-NK7FKVEW.js";
+import "./chunk-RPUO66UY.js";
 import "./chunk-XRD22AAG.js";
+import {
+  easeOut,
+  linear
+} from "./chunk-EZCDRW5B.js";
 import {
   DEVICE_PIXEL_RATIO,
   FIREFOX,
@@ -50,12 +47,15 @@ import {
   removeChildren,
   replaceChildren,
   replaceNode
-} from "./chunk-L4BQUPWH.js";
+} from "./chunk-HR4FOTSR.js";
 import {
-  easeOut,
-  linear
-} from "./chunk-EZCDRW5B.js";
-import "./chunk-G5HISESF.js";
+  Polygon_default,
+  apply,
+  compose,
+  create,
+  makeInverse
+} from "./chunk-PEHG7RCB.js";
+import "./chunk-4MCBMWN2.js";
 import {
   clone,
   createOrUpdateEmpty,
@@ -69,7 +69,7 @@ import {
   toUserCoordinate,
   warn,
   wrapX2 as wrapX
-} from "./chunk-5S3OIHWF.js";
+} from "./chunk-ALNPIH5Z.js";
 import {
   clamp
 } from "./chunk-OOA37YMO.js";
@@ -94,7 +94,7 @@ import {
 import "./chunk-EHX52PNM.js";
 import {
   __async
-} from "./chunk-K57UEZGG.js";
+} from "./chunk-FQORKCB4.js";
 
 // node_modules/ol/renderer/Map.js
 var MapRenderer = class extends Disposable_default {
