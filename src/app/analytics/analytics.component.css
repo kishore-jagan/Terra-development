@@ -10,9 +10,12 @@
     flex: 1.8; 
     background-color: #1e1e1e;
     border-radius: 20px;
-    margin: 10px;
+    margin: 0px 5px 0px 5px;
     padding: 20px;
-   
+    position: sticky; 
+    width: 250px;
+    top: 0; 
+    height: 100vh;
   }
 
   /* Main heading h5 */
@@ -61,7 +64,7 @@
 
 /* filter tide , filter ADCP */
   .stations{
-    margin: 40px 20px 0 20px; 
+    padding: 30px 20px 0px 20px; 
     height: 100px;
     width: 100%;
     color: white;
@@ -70,19 +73,10 @@
   }
 
   .stations h3{
-    /* padding-bottom: 5px; */
     font-size: 22px;
     font-weight: 400;
-    /* padding-top: 10px; */
   }
 
-  .h3{
-    color: white;
-    font-size: 24px;
-    font-weight: 500;
-    padding-top: 30px;
-    padding-left: 30px;
-  }
 
 
 /* Stations Field */
@@ -90,23 +84,47 @@
   .field {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
+    margin-bottom: 8px;
+    width: 100%;
   }
   
   .field label {
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     font-size: 18px;
     color: white;
+    padding-top: 10px;
   }
+
+  .full-width{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .full-width label{
+    margin-bottom: 2px;
+    font-size: 18px;
+    color: white;
+    padding-top: 2px;
+  }
+
+  .plot{
+    margin-top: 10px;
+  }
+
+
   
-  .field input, .field select{
+  /* .field input, .field select{
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #444;
     background-color: #333;
     color: white;
     font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
   }
+
   
   .field input[type="date"], 
   .field input[type="week"], 
@@ -129,20 +147,17 @@
     max-width: 120px;
   }
   
-  .field input:focus, .field select:focus {
+  .field input:focus, .field select:focus, .field select:hover .field input:hover {
     outline: none;
-    border-color: #888;
+    border-color: #1ee1ff; 
+    box-shadow: 0 0 5px rgba(30, 225, 255, 0.7);
   }
 
-
-
-/* Applying styles using ::ng-deep to penetrate View Encapsulation */
-/* multiselect */
 ::ng-deep .custom-multiselect .p-multiselect {
  
-    border-radius: 5px;    /* Optional: adjust border radius */
-    background-color: #333; /* Keeping your existing background color */
-    color: white;          /* Keeping your existing text color */
+    border-radius: 5px;    
+    background-color: #333; 
+    color: white;         
     font-size: 14px;
     width: 100%;
     max-width: 250px;
@@ -150,11 +165,16 @@
 }
 
 ::ng-deep .custom-multiselect .p-multiselect .p-multiselect-label {
-    color: white; /* Keep the text color white */
-}
+    color: white;
+} */
 
 
 /* check box */
+
+.checkbox{
+   padding-top: 15px;
+}
+
 .checkbox-group {
     display: flex; /* Align checkboxes in a row */
     gap: 20px; /* Space between checkboxes */
@@ -182,7 +202,7 @@
     flex-wrap: wrap;
     background-color: #1e1e1e;
     border-radius: 20px;
-    margin: 10px;
+    margin: 0px 10px 0px 10px;
     padding: 20px;
   }
   
@@ -192,10 +212,10 @@
     border-radius: 8px;
     margin: 10px 0; 
     display: flex;
-    justify-content: center; /* Center charts horizontally */
-    align-items: center; /* Center charts vertically */
+    justify-content: center; 
+    /* align-items: center; */
     flex: 1; /* Allow each chart container to grow equally */
-    min-height: 300px; /* Minimum height for each chart container */
+    min-height: 500px; /* Minimum height for each chart container */
   }
   
   .chart-diagram {

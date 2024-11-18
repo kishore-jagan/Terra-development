@@ -7,8 +7,11 @@ import {
   geoKeyNames,
   globals_exports,
   photometricInterpretations
-} from "./chunk-F5UGVMHI.js";
-import "./chunk-3C63TEGN.js";
+} from "./chunk-7UYRMPU3.js";
+import "./chunk-HJVVVDHP.js";
+import {
+  TileQueue_default
+} from "./chunk-6QPZE5GN.js";
 import {
   ATTRIBUTION,
   OSM_default,
@@ -30,29 +33,29 @@ import {
   nullTileUrlFunction,
   pickUrl,
   renderXYZTemplate
-} from "./chunk-CDGWXOUI.js";
+} from "./chunk-LEZNPUMF.js";
 import {
   ImageCanvas_default,
   Image_default as Image_default2,
   Vector_default,
   fromResolutionLike,
   loadFeaturesXhr
-} from "./chunk-INOCH76F.js";
-import {
-  Source_default
-} from "./chunk-W2VTVKH6.js";
+} from "./chunk-XLSTPAWA.js";
 import {
   Feature_default
 } from "./chunk-FCBGHDJ5.js";
-import {
-  TileQueue_default
-} from "./chunk-6QPZE5GN.js";
 import "./chunk-H7FSCGDP.js";
+import {
+  Source_default
+} from "./chunk-YBIDJNRH.js";
+import "./chunk-PPKC2NZ7.js";
 import {
   DataTile_default,
   DataTile_default2,
   Tile_default as Tile_default2
-} from "./chunk-YC6NMSCJ.js";
+} from "./chunk-EEMUAFYQ.js";
+import "./chunk-NXHNDBDV.js";
+import "./chunk-NXAWT2XU.js";
 import {
   ERROR_THRESHOLD,
   ImageTile_default,
@@ -65,19 +68,10 @@ import {
   getKeyZXY,
   hash,
   render
-} from "./chunk-EEB4OFHI.js";
-import "./chunk-6KPBXKF6.js";
-import {
-  ViewHint_default
-} from "./chunk-YKL57ABN.js";
+} from "./chunk-YRW22ALP.js";
 import {
   TileState_default
 } from "./chunk-Z3DISOEB.js";
-import {
-  DEFAULT_MAX_ZOOM,
-  DEFAULT_TILE_SIZE
-} from "./chunk-XY5EX7MJ.js";
-import "./chunk-NXAWT2XU.js";
 import {
   ImageState_default,
   Image_default,
@@ -87,12 +81,30 @@ import {
   scale as scale2,
   toSize
 } from "./chunk-ZLXPRQ4U.js";
-import "./chunk-UEO7C2R6.js";
+import {
+  ViewHint_default
+} from "./chunk-OPOXYUGB.js";
+import {
+  DEFAULT_MAX_ZOOM,
+  DEFAULT_TILE_SIZE
+} from "./chunk-XY5EX7MJ.js";
 import {
   Point_default,
   create
-} from "./chunk-OTCK6WKK.js";
+} from "./chunk-XMH4NNAN.js";
 import "./chunk-NRZEKP44.js";
+import {
+  Disposable_default,
+  EventType_default,
+  Event_default,
+  assert,
+  getUid,
+  linearFindNearest,
+  listen,
+  listenOnce,
+  toPromise,
+  unlistenByKey
+} from "./chunk-VBKY7ZCK.js";
 import {
   Projection_default,
   add,
@@ -126,18 +138,6 @@ import {
   transform
 } from "./chunk-RB4D37YD.js";
 import {
-  Disposable_default,
-  EventType_default,
-  Event_default,
-  assert,
-  getUid,
-  linearFindNearest,
-  listen,
-  listenOnce,
-  toPromise,
-  unlistenByKey
-} from "./chunk-VBKY7ZCK.js";
-import {
   ceil,
   clamp,
   floor,
@@ -154,7 +154,7 @@ import {
   __spreadProps,
   __spreadValues,
   __toESM
-} from "./chunk-T6SYERLG.js";
+} from "./chunk-ZTELYOIP.js";
 
 // node_modules/xml-utils/get-attribute.js
 var require_get_attribute = __commonJS({
@@ -2485,19 +2485,19 @@ function getDecoder(fileDirectory) {
     return new Decoder(fileDirectory);
   });
 }
-addDecoder([void 0, 1], () => import("./raw-7ZBSN25T.js").then((m) => m.default));
-addDecoder(5, () => import("./lzw-IOI4A22X.js").then((m) => m.default));
+addDecoder([void 0, 1], () => import("./raw-A2VBSZEA.js").then((m) => m.default));
+addDecoder(5, () => import("./lzw-PHV4ON5Z.js").then((m) => m.default));
 addDecoder(6, () => {
   throw new Error("old style JPEG compression is not supported.");
 });
-addDecoder(7, () => import("./jpeg-CBHHH3TW.js").then((m) => m.default));
-addDecoder([8, 32946], () => import("./deflate-YME7VCJX.js").then((m) => m.default));
-addDecoder(32773, () => import("./packbits-6MXXVWXH.js").then((m) => m.default));
-addDecoder(34887, () => import("./lerc-HR4LFSHZ.js").then((m) => __async(void 0, null, function* () {
+addDecoder(7, () => import("./jpeg-K3BBHTE5.js").then((m) => m.default));
+addDecoder([8, 32946], () => import("./deflate-GCDNPR2Y.js").then((m) => m.default));
+addDecoder(32773, () => import("./packbits-SOESLBKV.js").then((m) => m.default));
+addDecoder(34887, () => import("./lerc-Y5HUJX3A.js").then((m) => __async(void 0, null, function* () {
   yield m.zstd.init();
   return m;
 })).then((m) => m.default));
-addDecoder(50001, () => import("./webimage-II62XJID.js").then((m) => m.default));
+addDecoder(50001, () => import("./webimage-KGJ6CWGI.js").then((m) => m.default));
 
 // node_modules/geotiff/dist-module/resample.js
 function copyNewSize(array, width, height, samplesPerPixel = 1) {
@@ -3577,7 +3577,7 @@ var Pool = class {
     this.messageId = 0;
     if (size) {
       this._awaitingDecoder = createWorker2 ? Promise.resolve(createWorker2) : new Promise((resolve) => {
-        import("./decoder-4MK3WQQN.js").then((module) => {
+        import("./decoder-QGLBYR6Z.js").then((module) => {
           resolve(module.create);
         });
       });

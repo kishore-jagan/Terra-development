@@ -4,7 +4,7 @@ import {
   DecimalPipe,
   NgSwitch,
   NgSwitchCase
-} from "./chunk-IK6FRGZM.js";
+} from "./chunk-H4TAJNWD.js";
 import {
   Component,
   ContentChild,
@@ -44,8 +44,11 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵviewQuery
-} from "./chunk-QVGEF4EQ.js";
-import "./chunk-K57UEZGG.js";
+} from "./chunk-6LO2F3Z6.js";
+import "./chunk-DS3ZS4IA.js";
+import "./chunk-LEOSHXMA.js";
+import "./chunk-G4WBR3IQ.js";
+import "./chunk-FQORKCB4.js";
 
 // node_modules/ngx-gauge/fesm2022/ngx-gauge.mjs
 var _c0 = ["canvas"];
