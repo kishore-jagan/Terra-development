@@ -31,7 +31,7 @@ export interface buoys{
 export class StationService {
 
 
-  private apiUrl = 'http://192.168.0.113:3000/api/users/sensorData';
+  private apiUrl = 'http://localhost:3000/api/users/sensorData';
 
   constructor(private http: HttpClient) { }
 
@@ -45,6 +45,6 @@ export class StationService {
         console.error('Error fetching stations:', error);
         return throwError(() => new Error('Failed to fetch stations.'));
       })
-    );
+    )
   }
 }

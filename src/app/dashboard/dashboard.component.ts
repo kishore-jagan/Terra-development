@@ -50,12 +50,14 @@ export class DashboardComponent {
   m_current_d!:number;
   l_current_d!:number;
   current_unit:string = '';
-  battery: number = 12;
+  battery: number = 10;
   message:string = 'range';
   below_warning:number = 12.2;
   configs:Config[]=[];
   tide_unit:string ='';
-
+  time!:string;
+  utc!:string;
+  buoyImage!:string;
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private layout: LayoutComponent,
@@ -67,6 +69,7 @@ export class DashboardComponent {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 ngOnInit(): void {
+
   // this.route.paramMap.subscribe(params => {
   //   this.layout.page = params.get('page') || 'home';
   // });
@@ -103,38 +106,59 @@ ngOnInit(): void {
     return existingData;
   }
   assign(){
-    
-    this.tide_unit = this.layout.configs[0].unit;
-    this.data.getSensorLiveData('2024-01-01', '2024-10-25').subscribe(datat=>{
-      if(this.layout.selectedBuoy == 'CWPRS01'){
+    const date = new Date();
+    const todayDate = date.toISOString().substr(0, 10);
+     this.tide_unit = this.layout.configs[0].unit;
+    this.data.getSensorLiveData(todayDate, todayDate).subscribe(datat=>{
+       if(this.layout.selectedBuoy == 'CWPRS01'){
         this.sensorDatelist = datat.buoy1;
-        this.fetch();
+        this.buoyImage = this.layout.image1;
+         if(this.buoyImage !=null){
+          this.fetch();
+        }
+       
+        
       }else if(this.layout.selectedBuoy == 'CWPRS02'){
         this.sensorDatelist = datat.buoy2;
-        this.fetch();
+        this.buoyImage = this.layout.image2;
+        if(this.buoyImage !=null){
+          this.fetch();
+        }
+        
       }
       
-      console.log(this.sensorDatelist[0].StationID);
-     
+      
     },
   (error) => {
     console.error('Error fetching sensor data:', error);
   });
 
   } 
+  format(date:string, time:string):string{
+    const d = new Date(date);
+    const dd = d.toISOString().substr(0, 10);
+   const  formattedDate = dd;
+ 
+   const t = new Date(time);
+   const tt = t.toISOString().substr(11,8);
+   const formattedtime = tt;
+    return `${formattedDate} ${formattedtime}`;
+
+  }
   fetch(){
+
     const num = this.calculateResult(this.sensorDatelist[1].S1_RelativeWaterLevel, this.layout.configs[0].value);
-    console.log("tideOffset==", num);
-    if(this.sensorDatelist[0].S1_RelativeWaterLevel !=null){
+     if(this.sensorDatelist[0].S1_RelativeWaterLevel !=null){
       this.tide= this.calculateResult(this.sensorDatelist[0].S1_RelativeWaterLevel, this.layout.configs[0].value);
     }else{
       this.tide= this.calculateResult(this.sensorDatelist[1].S1_RelativeWaterLevel, this.layout.configs[0].value);
     }
     this.battery = parseFloat(this.sensorDatelist[0].Battery_Voltage);
-    console.log(this.sensorDatelist[0].Battery_Voltage
-    );
+   
     // this.sensorDatelist=this.layout.sensorDataList;
-    console.log('sensors:', this.battery);
+     this.time = 
+    this.format(this.sensorDatelist[0].Date, this.sensorDatelist[0].Time);
+    this.utc = this.format(this.sensorDatelist[0].UTC_Time, this.sensorDatelist[0].UTC_Time);
     // this.tide= this.sensorDatelist[0].S1_RelativeWaterLevel;
     this.lat = this.sensorDatelist[0].LAT;
     this.lang = this.sensorDatelist[0].LONG;
@@ -142,8 +166,7 @@ ngOnInit(): void {
     this.s_current =parseFloat(this.sensorDatelist[0].S2_SurfaceCurrentSpeedDirection.split(';')[0]); 
     this.m_current =parseFloat(this.sensorDatelist[0].Middle_CurrentSpeedDirection.split(';')[0]); 
     this.l_current =parseFloat(this.sensorDatelist[0].Lower_CurrentSpeedDirection.split(';')[0]); 
-    console.log('scurrent:', this.s_current, this.m_current, this.l_current);
-    this.cdr.detectChanges();
+     this.cdr.detectChanges();
     this.compassvalue1 = parseFloat(this.sensorDatelist[0].S2_SurfaceCurrentSpeedDirection.split(';')[1]);
     this.compval1= this.direction(this.compassvalue1);
     this.compassvalue2 = parseFloat(this.sensorDatelist[0].Middle_CurrentSpeedDirection.split(';')[1]);
@@ -214,7 +237,7 @@ ngOnInit(): void {
     }).addTo(this.map);
 
     const markerIcon = L.icon({
-      iconUrl: '../../assets/buoy.png',
+      iconUrl: this.buoyImage!,
       name:'Buoy 1',
       
       iconSize: [24, 24], // Set the size of the marker
@@ -253,24 +276,19 @@ ngOnInit(): void {
   checkBuoyRange(markerCoords: [number, number], L: any): void {
     const distance = this.map.distance(this.center, markerCoords);
     if (distance > this.radius) {
-      console.log('Buoy missing or out of range');
-    } else {
+     } else {
       this.message = 'range';
-      console.log('Buoy within range');
-    }
+     }
   }
 
   checkBuoyRange2(markerCoords: [number, number], L: any): void {
     const distance = this.map.distance(this.center, markerCoords);
     if (distance > this.wrange) {
-      console.log('Buoy is crossed warning range');
-      this.message = 'warning';
+       this.message = 'warning';
     } else if (distance > this.radius) {
-      console.log('Buoy crossed danger range');
-      this.message = 'warning';
+       this.message = 'warning';
     }else{
       this.message = 'range';
-      console.log('Buoy within range2');
-    }
+     }
   }
 }
