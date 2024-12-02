@@ -10,6 +10,7 @@ const getUsers = async (req, res) => {
         res.json(result.recordset); // SQL Server returns result in `recordset`
     } catch (err) {
         res.status(500).send(err);
+        
     }
 };
 const getRoles = async (req, res) => {
@@ -490,7 +491,7 @@ const test = async (req, res) => {
 const getSensors = async (req, res) => {
     const { fromDate, toDate } = req.query;
 
-    // Check if dates exist
+    // Validate the presence of both parameters
     if (!fromDate || !toDate) {
         return res.status(400).json({ message: 'fromDate and toDate are required.' });
     }
@@ -499,39 +500,48 @@ const getSensors = async (req, res) => {
         console.log('Received fromDate:', fromDate);
         console.log('Received toDate:', toDate);
 
-        // SQL Query with fromDate and toDate as string inputs
+        // Define your queries for both tables
         const querySensorsData = `
-            SELECT *, 
-                   CAST(Date AS DATETIME) + CAST(Time AS DATETIME) AS DateTime
+            SELECT * 
             FROM sensorsData
-            WHERE CAST(Date AS DATETIME) + CAST(Time AS DATETIME) >= '${fromDate}'
-              AND CAST(Date AS DATETIME) + CAST(Time AS DATETIME) <= '${toDate}'
+            WHERE Date >= @fromDate AND Date <= @toDate
         `;
 
         const queryCWPRSData = `
-            SELECT *, 
-                   CAST(Date AS DATETIME) + CAST(Time AS DATETIME) AS DateTime
+            SELECT * 
             FROM cwprs2
-            WHERE CAST(Date AS DATETIME) + CAST(Time AS DATETIME) >= '${fromDate}'
-              AND CAST(Date AS DATETIME) + CAST(Time AS DATETIME) <= '${toDate}'
+            WHERE Date >= @fromDate AND Date <= @toDate
         `;
 
-        // Execute both queries
-        const resultSensorsData = await new sql.Request().query(querySensorsData);
-        const resultCWPRSData = await new sql.Request().query(queryCWPRSData);
+        const request = new sql.Request();
+        request.input('fromDate', sql.DateTime, new Date(fromDate));
+        request.input('toDate', sql.DateTime, new Date(toDate));
 
+        // Log the parsed dates
+        console.log('Parsed fromDate:', new Date(fromDate));
+        console.log('Parsed toDate:', new Date(toDate));
+
+        // Execute the first query for sensorsData
+        const resultSensorsData = await request.query(querySensorsData);
+        const data1 = resultSensorsData.recordset.reverse(); // Fetching and reversing order
+
+        // Execute the second query for cwprs2
+        const resultCWPRSData = await request.query(queryCWPRSData);
+        const data2 = resultCWPRSData.recordset.reverse(); // Fetching and reversing order
+
+        // Structure the response as required
         const response = {
-            buoy1: resultSensorsData.recordset.reverse(),
-            buoy2: resultCWPRSData.recordset.reverse(),
+            buoy1: data1,
+            buoy2: data2
         };
 
+        // Return the structured response
         res.json(response);
     } catch (err) {
         console.error('Error executing query:', err);
         res.status(500).send(err);
     }
 };
-
 
 
 
@@ -664,7 +674,7 @@ const getconfigs = async (req, res) => {
 
 const updateStationConfig = async (req, res) => {
     console.log('Received update request with body:', req.body);
-    const { station_name, warning_circle, danger_circle, geo_format, latitude_dd, longitude_dd, latitude_deg, latitude_min, latitude_sec, longitude_deg, longitude_min, longitude_sec } = req.body;
+    const {station, station_name, warning_circle, danger_circle, geo_format, latitude_dd, longitude_dd, latitude_deg, latitude_min, latitude_sec, longitude_deg, longitude_min, longitude_sec } = req.body;
 
     // Validate the required fields
     if (!station_name || !geo_format) {
@@ -674,6 +684,7 @@ const updateStationConfig = async (req, res) => {
     // Update logic based on geo_format (either 'DD' or 'DMS')
     let query = '';
     let params = [
+        { name: 'station', type: sql.VarChar, value: station },
         { name: 'station_name', type: sql.VarChar, value: station_name },
         { name: 'warning_circle', type: sql.Float, value: warning_circle },
         { name: 'danger_circle', type: sql.Float, value: danger_circle },
@@ -683,7 +694,7 @@ const updateStationConfig = async (req, res) => {
     if (geo_format === 'DD') {
         // Update for Decimal Degrees (DD)
         query = `UPDATE station_configurations 
-                 SET warning_circle = @warning_circle, danger_circle = @danger_circle, 
+                 SET station = @station, warning_circle = @warning_circle, danger_circle = @danger_circle, 
                  latitude_dd = @latitude_dd, longitude_dd = @longitude_dd, geo_format = @geo_format
                  WHERE station_name = @station_name`;
 
@@ -694,7 +705,7 @@ const updateStationConfig = async (req, res) => {
     } else if (geo_format === 'DMS') {
         // Update for Degrees, Minutes, Seconds (DMS)
         query = `UPDATE station_configurations 
-                 SET warning_circle = @warning_circle, danger_circle = @danger_circle, 
+                 SET station = @station, warning_circle = @warning_circle, danger_circle = @danger_circle, 
                  latitude_deg = @latitude_deg, latitude_min = @latitude_min, latitude_sec = @latitude_sec,
                  longitude_deg = @longitude_deg, longitude_min = @longitude_min, longitude_sec = @longitude_sec, 
                  geo_format = @geo_format

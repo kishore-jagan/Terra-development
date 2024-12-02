@@ -2,6 +2,8 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { LayoutComponent } from '../layout/layout.component';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { LoginComponent } from '../login/login.component';
+import { use } from 'echarts';
 import { ConfigDataService } from '../config-data.service';
 import { ThemeService } from '../theme_service/theme.service';
 
@@ -14,12 +16,13 @@ import { ThemeService } from '../theme_service/theme.service';
 })
 export class SidenavComponent implements OnInit{
   currentTheme: string = 'dark';
-  // username!:string;
-  constructor (private layout:LayoutComponent, private themeService: ThemeService, private router:Router, private toastr:ToastrService, private renderer:Renderer2, private route: ActivatedRoute, private user:ConfigDataService){}
+  username!:string;
+  constructor (private layout:LayoutComponent, private router:Router, private toastr:ToastrService, private renderer:Renderer2, private route: ActivatedRoute, private user:ConfigDataService, private themeservice:ThemeService){}
   isPageSelected(page: string): boolean {
     return this.layout.page === page;
   }
     onPageChange(name:String){
+      
       // this.router.navigate(['/base', name]);
       // this.route.paramMap.subscribe(params => {
       //   this.layout.page = params.get('page') || name;
@@ -31,8 +34,7 @@ export class SidenavComponent implements OnInit{
         this.layout.page = name;
         // this.layout.page = name;
         this.router.navigate(['/base', name]);
-        console.log(this.layout.page);
-        if(this.layout.page === 'logout'){
+         if(this.layout.page === 'logout'){
     this.router.navigate(['/login']);
         }
       }
@@ -40,7 +42,7 @@ export class SidenavComponent implements OnInit{
       
     }
   ngOnInit(): void {
-    // this.username = this.user.CurrentUser.name;
+    this.username = localStorage.getItem('username') ?? "";
     this.renderer.setAttribute(document.body, 'data-theme', this.currentTheme);
   }
 
@@ -48,6 +50,6 @@ export class SidenavComponent implements OnInit{
     this.currentTheme = theme;
     // this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
     this.renderer.setAttribute(document.body, 'data-theme', this.currentTheme);
-    this.themeService.changeTheme(this.currentTheme);
+    this.themeservice.changeTheme(this.currentTheme);
   }
 }

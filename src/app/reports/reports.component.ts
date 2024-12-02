@@ -16,6 +16,7 @@ import * as FileSaver from 'file-saver';
   
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { is } from '@amcharts/amcharts4/core';
 
 
 interface Column {
@@ -68,13 +69,13 @@ exportOptions = [
 
     ngOnInit(): void {
       this.cols = [
-        { field: 'S1_RelativeWaterLevel', header: 'Water\nLevel' },
-        { field: 'SurfaceSpeed', header: 'Surface\nSpeed' },
-        { field: 'SurfaceDirection', header: 'Surface\nDirection' },
-        { field: 'MiddleSpeed', header: 'Mid\nSpeed' },
-        { field: 'MiddleDirection', header: 'Mid\nDirection' },
-        { field: 'LowerSpeed', header: 'Bottom\nSpeed' },
-        { field: 'LowerDirection', header: 'Bottom\nDirection' }
+        { field: 'S1_RelativeWaterLevel', header: 'Water Level' },
+        { field: 'SurfaceSpeed', header: 'Surface Speed' },
+        { field: 'SurfaceDirection', header: 'Surface Direction' },
+        { field: 'MiddleSpeed', header: 'Mid Speed' },
+        { field: 'MiddleDirection', header: 'Mid Direction' },
+        { field: 'LowerSpeed', header: 'Bottom Speed' },
+        { field: 'LowerDirection', header: 'Bottom Direction' }
     ];
 
     this.selectedColumns = this.cols; 
@@ -97,12 +98,7 @@ exportOptions = [
       default:
         break;
     }
-
-    // Clear selection in dropdown to re-enable selection on next click
-    this.exportOptions = [...this.exportOptions]; // Reset dropdown options
-    setTimeout(() => event.value = null, 0); // Clear the selected value
-}
-
+  }
 
   // private formatToUTC(date: Date): string {
   //   const utcDate = new Date(date.getTime() - (5.5 * 60 * 60 * 1000));
@@ -182,12 +178,10 @@ exportOptions = [
       }
     }
   
-    console.log(`Formatted From Date: ${formattedFromDate}, Formatted To Date: ${formattedToDate}`);
-  
+   
     this.stationService.getStations(formattedFromDate!, formattedToDate!).subscribe(
       (data: buoys) => {
-        console.log('API Response:', JSON.stringify(data, null, 2));
-        this.CWPRS01 = data.buoy1.map(buoy => ({
+         this.CWPRS01 = data.buoy1.map(buoy => ({
           ...buoy,
           SurfaceSpeed: buoy.S2_SurfaceCurrentSpeedDirection?.split(';')[0],
           SurfaceDirection: buoy.S2_SurfaceCurrentSpeedDirection?.split(';')[1],
@@ -219,8 +213,7 @@ exportOptions = [
 
   onPeriodChange(event: any) {
     // this.selectedPeriod = event.target.value
-  console.log('Selected Period:', event.value);
-}
+ }
 
 getWeekEndDate(startDate: Date): Date {
   let endDate = new Date(startDate);
@@ -254,12 +247,9 @@ onSearch(query: string, dt2: any): void {
   this.selectedStation = type;
   
   if(this.selectedStation == 'CWPRS01'){
-    console.log(this.CWPRS01); 
-  }else if(this.selectedStation == 'CWPRS02'){
-    console.log(this.CWPRS01);
-  }
-  console.log(`selectedType : ${this.selectedStation}`);
-  }
+   }else if(this.selectedStation == 'CWPRS02'){
+   }
+   }
     
   exportCSV(dt2: any) {
     const filteredData = dt2.filteredValue || dt2.value;
@@ -267,129 +257,165 @@ onSearch(query: string, dt2: any): void {
     if (filteredData && filteredData.length > 0) {
         const csv = this.convertToCSV(filteredData);
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-
-        // Append timestamp to filename to make it unique
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const filename = `buoy_data_${timestamp}.csv`;
-
-        FileSaver.saveAs(blob, filename);
+        FileSaver.saveAs(blob, 'buoy_data.csv');
     } else {
+        // Handle case where no data is available
         console.warn('No data available for CSV export');
     }
 }
 
-
+// Helper method to convert JSON to CSV format
 convertToCSV(data: any[]): string {
   // Define fixed headers and fields to always include
-  const fixedHeaders = ['StationID', 'DateTime', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
-  const fixedFields = ['StationID', 'DateTime', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
-
+  const fixedHeaders = ['StationID', 'Date','Time', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
+  const fixedFields = ['StationID', 'Date','Time', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
+ 
   // Get dynamic headers and fields from selected columns
   const dynamicHeaders = this.selectedColumns.map(col => col.header);
   const dynamicFields = this.selectedColumns.map(col => col.field);
-
+ 
   // Combine fixed and dynamic headers and fields
   const headers = [...fixedHeaders, ...dynamicHeaders];
   const fields = [...fixedFields, ...dynamicFields];
-
+ 
   // Build CSV rows with combined headers and fields
-  const csvRows = [
+  const csvRows1 = [
       headers.join(','), // First row with combined headers
-      ...data.map(row => fields.map(field => `"${row[field] || ''}"`).join(',')) // Include values for combined fields in each row
+      ...data.map(row => fields.map(field => `"${row[field] || ''}"`).join(',')) 
   ];
-
+ 
+  const csvRows = [
+    headers.join(','), // First row with combined headers
+    ...data.map(row => 
+      fields.map(field => {
+        // Handle date fields to extract date part
+        if (field === 'Date') {
+          const isoDate = row[field]; // Assume 'Date' field contains ISO date string
+          return isoDate ? isoDate.split('T')[0] : ''; // Split and return only the date part
+        }
+        if (field === "Time"){
+          const isoTime = row[field];
+          return isoTime ? isoTime.split('T')[1]?.split('.')[0] : '';
+        }
+        return row[field] || ''; // Default for other fields
+      }).join(',')
+    )
+  ];
   return csvRows.join('\r\n');
 }
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
 exportExcel(dt2: any) {
   const filteredData =  dt2.value;
-
+ 
   if (filteredData && filteredData.length > 0) {
       // Define fixed headers and fields to always include
-      const fixedHeaders = ['StationID', 'DateTime', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
-      const fixedFields = ['StationID', 'DateTime', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
-
+      const fixedHeaders = ['StationID', 'Date','Time', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
+      const fixedFields = ['StationID', 'Date','Time', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
+ 
       // Get dynamic headers and fields from selected columns
       const dynamicHeaders = this.selectedColumns.map(col => col.header);
       const dynamicFields = this.selectedColumns.map(col => col.field);
-
+ 
       // Combine fixed and dynamic headers and fields
       const headers = [...fixedHeaders, ...dynamicHeaders];
       const fields = [...fixedFields, ...dynamicFields];
-
+ 
       // Map filteredData to include both fixed and dynamic fields
       const dataToExport = filteredData.map((row: any) => {
           const selectedRow: any = {};
-
+ 
           // Populate fixed fields first
-          fixedFields.forEach(field => {
-              selectedRow[field] = row[field];
-          });
+          // fixedFields.forEach(field => {
+          //     selectedRow[field] = row[field];
+          // });
 
+          fixedFields.forEach(field => {
+            if (field === 'Date') {
+              const isoDate = row['Date'];
+              selectedRow[field] = isoDate ? isoDate.split('T')[0] : '';
+            } else if(field === 'Time') {
+               const isoTime = row['Time'];
+               selectedRow[field] = isoTime ? isoTime.split('T')[1]?.split('.')[0] : ''; 
+            } else {
+              selectedRow[field] = row[field];
+            }
+
+        });
+ 
           // Populate dynamic fields
           dynamicFields.forEach(field => {
               selectedRow[field] = row[field];
           });
-
+ 
           return selectedRow;
       });
-
+ 
       // Create the worksheet with combined headers
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport, {  });
       const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-
+ 
       this.saveAsExcelFile(excelBuffer, 'buoy_data');
   } else {
       console.warn('No data available for Excel export');
   }
 }
-
+ 
 saveAsExcelFile(buffer: any, fileName: string): void {
   const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
   const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
   saveAs(data, `${fileName}_export_${new Date().getTime()}.xlsx`);
 }
-
-
-
-
+ 
+ 
+ 
+ 
 exportPDF(dt2: any) {
   const filteredData: BuoyData[] = dt2.value;
-
+ 
   if (filteredData && filteredData.length > 0) {
       // Define fixed headers and fields to always include
-      const fixedHeaders = ['StationID', 'DateTime', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
-      const fixedFields = ['StationID', 'DateTime', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
-
+      const fixedHeaders = ['StationID', 'Date','Time', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
+      const fixedFields = ['StationID', 'Date','Time', 'UTC_Time', 'LAT', 'LONG', 'Battery_Voltage', 'GPS_Date'];
+ 
       // Get dynamic headers and fields from selected columns
       const dynamicHeaders = this.selectedColumns.map(col => col.header);
       const dynamicFields = this.selectedColumns.map(col => col.field);
-
+ 
       // Combine fixed and dynamic headers and fields
       const headers = [...fixedHeaders, ...dynamicHeaders];
       const fields = [...fixedFields, ...dynamicFields];
-
+ 
       // Create a PDF with landscape orientation
       const doc = new jsPDF('landscape');
-
+ 
       // Set document properties
       doc.setFontSize(12);
       doc.text(this.selectedStation, 14, 16);
-
+ 
       // Prepare headers for the table
       const headerObjects = headers.map(header => ({ title: header, dataKey: header }));
-
+ 
       // Map data to include both fixed and dynamic fields
-      const data = filteredData.map((row: any) => {
-          return fields.map(field => row[field] || ''); // Handle undefined or null values gracefully
+      const data1 = filteredData.map((row: any) => {
+          return fields.map(field => row[field] || ''); 
       });
 
+      const data = filteredData.map((row: any) => {
+        return fields.map(field => {
+          if (field === 'Date'){
+            const isoDate = row[field];
+            return isoDate ? isoDate.split('T')[0] : '';
+          }
+          return row[field] || '';
+        }); 
+    });
+ 
       // Add table to PDF with fixed and dynamic fields
       (doc as any).autoTable({
           head: [headerObjects.map(h => h.title)], // Headers row
@@ -398,7 +424,7 @@ exportPDF(dt2: any) {
           margin: { top: 20 }, // Adjust top margin
           styles: { fontSize: 8 }, // Adjust font size to fit more data
       });
-
+ 
       // Save the PDF in landscape mode
       doc.save('buoy_data.pdf');
   } else {
@@ -406,5 +432,14 @@ exportPDF(dt2: any) {
       console.warn('No data available for PDF export');
   }
 }
-
 }
+
+
+
+
+
+
+
+
+
+

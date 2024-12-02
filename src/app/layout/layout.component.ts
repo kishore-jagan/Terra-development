@@ -44,12 +44,19 @@ export class LayoutComponent implements OnInit {
   StationConfig:StationConfigs[]=[];
   stationName1!:string;
   stationName2!:string;
+  image1!:string;
+  image2!:string;
   // currentUser!:CurrentUser;
   
-constructor(private configss:ConfigDataService, private route: ActivatedRoute, private router: Router){}
+  getScreenSize(){
+    return { width: window.innerWidth, height: window.innerHeight };
+  }
+constructor(private configss:ConfigDataService, private route: ActivatedRoute, private router: Router, private toast:ToastrService){}
   ngOnInit(): void {
-    // console.log("username",this.configss.CurrentUser.name);
-    this.route.paramMap.subscribe(params => {
+    const scren = this.getScreenSize();
+
+   // this.toast.success(`width: ${scren.width}`, `height: ${scren.height}`);
+     this.route.paramMap.subscribe(params => {
       this.page = params.get('page') || 'home';
     });
     // this.getStationConfig();
@@ -69,40 +76,36 @@ constructor(private configss:ConfigDataService, private route: ActivatedRoute, p
 
   sensors() {
    
-    this.httpClient.get('http://192.168.0.113:3000/api/users/sensorData?fromDate=2024-01-10&toDate=2024-01-10')
+    this.httpClient.get('http://localhost:3000/api/users/sensorData?fromDate=2024-01-10&toDate=2024-11-09')
   .subscribe((data: any) => {
-      console.log('sensorData:== ', data);
-      // this.sensorDataList = data;
+       // this.sensorDataList = data;
       // Optionally log the sensorDataList to verify
-      console.log('sensorDataList after assignment:', this.sensorDataList);
-  });
+   });
   }
 
   getConfigs(){
-    this.httpClient.get('http://192.168.0.113:3000/api/getconfigs')
+    this.httpClient.get('http://localhost:3000/api/getconfigs')
     .subscribe((data:any)=>{
     
       this.configs=data;
-      console.log('configs:== ', this.configs);
-    });
+     });
   }
 
   // getStationConfig(){
-  //   this.httpClient.get('http://192.168.0.113:3000/api/getstationconfig')
+  //   this.httpClient.get('http://localhost:3000/api/getstationconfig')
   //   .subscribe((data:any)=>{
   //     this.StationConfig=data;
-  //     console.log('Station Configs',this.StationConfig);
-  //     console.log(this.StationConfig[0].geo_format)
+ 
   //   // this.StationConfig = this.layout.StationConfig;
   //   this.stationName1 = this.StationConfig[0].station_name;
   //   this.stationName2 = this.StationConfig[1].station_name;
-  //   console.log(this.stationName1, this.stationName2);
+ 
   //   if(this.StationConfig[0].geo_format === "DMS"){
 
   //     const lat = this.StationConfig[0].latitude_deg + (this.StationConfig[0].latitude_min/60)+(this.StationConfig[0].latitude_min/3600);
   //     const lan = this.StationConfig[0].longitude_deg + (this.StationConfig[0].longitude_min/60)+(this.StationConfig[0].longitude_sec/3600);
       
-  //     console.log("lattitude",lat, lan);
+ 
       
   //   }else if(this.StationConfig[0].geo_format == "DD"){
 

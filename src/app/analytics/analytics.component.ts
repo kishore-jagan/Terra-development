@@ -211,14 +211,12 @@ ngAfterViewInit() {
 } 
 
 onPeriodChange(event: any) {
-  console.log('Selected period:', event.value);
 }
 
 selectSensorOption(typee: String) {
 this.selectedSensor = typee;
 this.onSensorChange();
-console.log(`selectedType : ${this.selectedSensor}`);
-}
+ }
 
 onSensorChange() {
   if (this.selectedSensor === 'adcp') {
@@ -246,9 +244,7 @@ onSensorChange() {
     // this.sampleData2 = [];
     // this.sampleData3 = [];
     this.SubmitedslectedOption = this.selectedSensor;
-    console.log('Submitted selected option:', this.selectedSensor);
-    console.log('Selected chart type:', this.selectedChart);
-  
+    
     // Format date range for fetching data
     let formattedFromDate: string | null = null;
     let formattedToDate: string | null = null;
@@ -314,12 +310,10 @@ onSensorChange() {
       }
     }
   
-    console.log(`Formatted From Date: ${formattedFromDate}, Formatted To Date: ${formattedToDate}`);
-  
+   
     this.stationService.getStations(formattedFromDate!, formattedToDate!).subscribe(
       (data: buoys) => {
-        console.log('API Response:', JSON.stringify(data, null, 2));
-        this.cwprs01 = data.buoy1.map(buoy => ({
+         this.cwprs01 = data.buoy1.map(buoy => ({
           ...buoy,
           SurfaceSpeed: buoy.S2_SurfaceCurrentSpeedDirection?.split(';')[0],
           SurfaceDirection: buoy.S2_SurfaceCurrentSpeedDirection?.split(';')[1],
@@ -844,7 +838,7 @@ Tide(): void {
         },
         
         yAxis: {
-          name: 'Water Level (m)',  // Y-axis legend (title)
+          name: 'Water Level (m/s)',  // Y-axis legend (title)
           nameLocation: 'middle',
           nameTextStyle: {
             color: mainText,
@@ -922,9 +916,9 @@ Tide(): void {
         series: [
           {
             name: 'Water Level',
-            data:  dates.map((date, index) => ({ value: [date, waterLevels[index]] })),
+            // data:  dates.map((date, index) => ({ value: [date, waterLevels[index]] })),
             // data: this.sampleDataTide.map(item => [item.date, item.level]),
-              //  data: sampleData.map(item => [item[0], item[1]]),
+             data: sampleData.map(item => [item[0], item[1]]),
             type: chartType === 'bar' ? 'bar'  : chartType,
             smooth: chartType === 'line',
             lineStyle: chartType === 'line' ? { color: '#1ee1ff' } : { color: 'orange' },
@@ -951,12 +945,10 @@ Tide(): void {
         this.loading = false;
         window.addEventListener('resize', () => {
           tideLevel.resize();
-          console.log('Chart type applied:', chartType);
-      }); 
+       }); 
       } 
       else {
-        console.error("Element with id 'waterLevel1' not found");
-        this.loading = false;
+         this.loading = false;
       }
     }
     
@@ -1196,9 +1188,9 @@ surfaceSpeedDirection(): void {
         series: [
           ...(this.isSpeedChecked ? [{
             name: 'Current Speed (m/s)',
-            data:  dates.map((date, index) => ({ value: [date, surfaceCurrent[index]?.split(';')[0]] })), 
+            // data:  dates.map((date, index) => ({ value: [date, surfaceCurrent[index]?.split(';')[0]] })), 
             // data: this.sampleData.map(item => [item.time, item.speed]),
-            // data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_speed]),
+            data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_speed]),
             type: chartType === 'bar' ? 'bar' : chartType,
             lineStyle: { normal: { color: 'orange' } },
             itemStyle: { color: 'orange' },
@@ -1209,8 +1201,8 @@ surfaceSpeedDirection(): void {
           ...(this.isCurrentChecked ? [{
             name: 'Current Direction (°)',
             // data: this.sampleData.map(item => [item.time, item.direction]),
-            data: dates.map((date, index) => ({ value: [date, surfaceCurrent[index]?.split(';')[1]] })),
-            // data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_direction]),
+            // data: dates.map((date, index) => ({ value: [date, surfaceCurrent[index]?.split(';')[1]] })),
+            data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_direction]),
             type:  chartType,
             lineStyle: { normal: { color: 'red', type: 'dashed' } },
             itemStyle: { color: 'red' },
@@ -1467,8 +1459,8 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
                   {
                     name: 'Current Speed (m/s)',
                     // data: this.sampleData2.map(item => [item.time, item.speed]), 
-                      // data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_speed]),
-                      data:  dates.map((date, index) => ({ value: [date, midCurrent[index]?.split(';')[0]] })),
+                      data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_speed]),
+                      // data:  dates.map((date, index) => ({ value: [date, midCurrent[index]?.split(';')[0]] })),
                     type: chartType,
                     lineStyle: {
                         normal: {
@@ -1491,8 +1483,8 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
                     {
                       name: 'Current Direction (°)',
                       // data: this.sampleData.map(item => [item.time, item.direction]),
-                        //  data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_direction]),
-                        data: dates.map((date, index) => ({ value: [date, midCurrent[index]?.split(';')[1]] })),
+                         data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_direction]),
+                        // data: dates.map((date, index) => ({ value: [date, midCurrent[index]?.split(';')[1]] })),
                       type: chartType,
                       lineStyle: {
                           normal: {
@@ -1740,8 +1732,8 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
               ...(this.isSpeedChecked ? [{
                 name: 'Current Speed (m/s)',
                 // data: this.sampleData3.map(item => [item.time, item.speed]),
-                //  data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_speed]),
-                data:  dates.map((date, index) => ({ value: [date, bottomCurrent[index]?.split(';')[0]] })),                   
+                 data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_speed]),
+                // data:  dates.map((date, index) => ({ value: [date, bottomCurrent[index]?.split(';')[0]] })),                   
                 type: chartType,
                 lineStyle: { normal: { color: '#00bfff' } },  // Updated to blue
                 itemStyle: { color: '#00bfff' },  // Updated to blue
@@ -1754,8 +1746,8 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
                 {
                   name: 'Current Direction (°)',
                   // data: this.sampleData3.map(item => [item.time, item.direction]),
-                    //  data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_direction]),
-                    data: dates.map((date, index) => ({ value: [date, bottomCurrent[index]?.split(';')[1]] })),
+                     data: this.sampleDataAdcp.map(item => [item.timestamp, item.current_direction]),
+                    // data: dates.map((date, index) => ({ value: [date, bottomCurrent[index]?.split(';')[1]] })),
                   type: chartType,
                   lineStyle: { normal: { color: 'green', type: 'dashed' } },  // Updated to green
                   itemStyle: { color: 'green' },  // Updated to green
@@ -1789,6 +1781,7 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
         const bgColor = computedStyle.getPropertyValue('--secbackground-color').trim();
         const mainText = computedStyle.getPropertyValue('--chart-maintext').trim();
         const subText = computedStyle.getPropertyValue('--main-text').trim();
+        const text = computedStyle.getPropertyValue('--text-color').trim();
       
           const surfaceCurrent = this.selectedStation === 'cwprs01'
           ? this.cwprs01.map(item => item.S2_SurfaceCurrentSpeedDirection)
@@ -1833,7 +1826,7 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
           }));
           
           // Map directions to labels and fill dataBins with counts
-          surfacePolar.forEach(({ speed, direction }) => {
+          this.sampleDataPolar.forEach(({ speed, direction }) => {
               const directionIndex = Math.round(direction / 22.5) % 16;
               const speedCategory = categorizeSpeed(speed);
               dataBins[directionIndex][speedCategory] += 1;
@@ -1910,6 +1903,13 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
               axisLabel: {
                 color: subText,
                   formatter: '{value}'
+              },
+              splitLine: {
+                show: true,
+                lineStyle: {
+                  color: text,
+                  type: 'dashed'
+                }
               }
           },
           tooltip: {
@@ -1948,15 +1948,12 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
       
       // Render the chart and handle resizing
       windRoseChart1.setOption(option);
-      console.log('dataBins:', dataBins);
-      console.log('seriesData:', seriesData);
-      console.table(dataBins);
+       console.table(dataBins);
       
       this.loading = false;
       window.addEventListener('resize', () => windRoseChart1.resize());
       } else {
-      console.error("Element with id 'rose-plot' not found");
-      this.loading = false;
+       this.loading = false;
       }
       }
       
@@ -1969,8 +1966,10 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
         const bgColor = computedStyle.getPropertyValue('--secbackground-color').trim();
         const mainText = computedStyle.getPropertyValue('--chart-maintext').trim();
         const subText = computedStyle.getPropertyValue('--main-text').trim();
+        const text = computedStyle.getPropertyValue('--text-color').trim();
         
       
+       
           // Real-time data: Fetch and parse speed and direction
           const midCurrent = this.selectedStation === 'cwprs01'
           ? this.cwprs01.map(item => item.Middle_CurrentSpeedDirection)
@@ -2024,7 +2023,7 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
       }));
       
       // Map directions to labels and fill dataBins with counts
-      midPolar.forEach(({ speed, direction }) => {
+      this.sampleDataPolar.forEach(({ speed, direction }) => {
           const directionIndex = Math.round(direction / 22.5) % 16;
           const speedCategory = categorizeSpeed(speed);
           dataBins[directionIndex][speedCategory] += 1;
@@ -2091,6 +2090,13 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
               axisLabel: {
                 color: subText,
                   formatter: '{value}'
+              },
+              splitLine: {
+                show: true,
+                lineStyle: {
+                  color: text,
+                  type: 'dashed'
+                }
               }
           },
           tooltip: {
@@ -2129,8 +2135,7 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
       
       // Render the chart and handle resizing
       windRoseChart1.setOption(option);
-      console.log('dataBins:', dataBins);
-      console.log('seriesData:', seriesData);
+ 
       console.table(dataBins);
       
       this.loading = false;
@@ -2206,7 +2211,7 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
       }));
       
       // Map directions to labels and fill dataBins with counts
-      surfacePolar.forEach(({ speed, direction }) => {
+      this.sampleDataPolar.forEach(({ speed, direction }) => {
           const directionIndex = Math.round(direction / 22.5) % 16;
           const speedCategory = categorizeSpeed(speed);
           dataBins[directionIndex][speedCategory] += 1;
@@ -2235,18 +2240,17 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
             fontSize: 20
           }
         },
-        legend: {
-          data: speedCategories,
-          top: 5,
-          right: 0,
-          orient: 'vertical',
-          textStyle: {
-            color: subText, // White legend text
-            fontSize: 12, // Reduced font size
-          },
-  },
-          polar: {
-          },
+          legend: {
+            data: speedCategories,
+            top: 10,
+            right: 0,
+            orient: 'vertical', 
+            textStyle: {
+              color: subText, // White legend text
+              fontSize: 12,
+            }        
+        },
+          polar: {},
           angleAxis: {
               type: 'category',
               data: directionLabels,
@@ -2262,7 +2266,7 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
                 },
                 axisLine: {
                   lineStyle: {
-                    color: mainText 
+                    color: subText 
                   }
                 },
             },
@@ -2288,11 +2292,10 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
               splitLine: {
                 show: true,
                 lineStyle: {
-                  color: text, // Set grey color for inner circular grid lines
-                  type: 'dashed',
-                  // width: 1 
+                  color: text,
+                  type: 'dashed'
                 }
-              },
+              }
           },
           tooltip: {
               trigger: 'item',
@@ -2304,8 +2307,7 @@ this.selectedStation === 'cwprs02' ? this.cwprs02.map(item =>`${item.Date?.split
       
       // Render the chart and handle resizing
       windRoseChart1.setOption(option);
-      console.log('dataBins:', dataBins);
-      console.log('seriesData:', seriesData);
+
       console.table(dataBins);
       
       this.loading = false;
