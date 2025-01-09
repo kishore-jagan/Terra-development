@@ -13,7 +13,7 @@
 }
 
 [data-theme="dark"] {
-  --primary-color: #3498db;
+  --primary-color: #3498adb;
   --background-color: #232323;
   --selected-color:rgb(169, 167, 167);
   --text-color: #ffffff;

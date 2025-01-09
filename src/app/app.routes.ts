@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 // import path from 'node:path';
-import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportsComponent } from './reports/reports.component';
@@ -27,22 +26,6 @@ export const routes: Routes = [
     component: LayoutComponent,
     canActivate:[AuthGuard],
     children: [
-      // {
-      //   path: 'home',
-      //   component: HomeComponent
-      // },
-      // {
-      //   path: 'dashboard',
-      //   component: DashboardComponent
-      // },
-      // {
-      //   path: 'report',
-      //   component: ReportsComponent
-      // },
-      // {
-      //   path: 'analytics',
-      //   component: AnalyticsComponent
-      // }
     ]
   },
   { path: '**', redirectTo: 'login' }

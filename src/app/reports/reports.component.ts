@@ -8,7 +8,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 
-import { StationService, buoys, BuoyData} from '../station_service/station.service';
+import { StationService, buoys} from '../station_service/station.service';
 
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
@@ -17,6 +17,7 @@ import * as FileSaver from 'file-saver';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { is } from '@amcharts/amcharts4/core';
+import { SensorData, SensorData2 } from '../../model/config.model';
 
 
 interface Column {
@@ -60,8 +61,8 @@ exportOptions = [
     selectedMonth =new Date();
     selectedYear =new Date();
 
-    CWPRS01: BuoyData[] = [];
-    CWPRS02: BuoyData[] = [];
+    CWPRS01: SensorData[] = [];
+    CWPRS02: SensorData2[] = [];
 
     loading: boolean = false;
 
@@ -79,6 +80,7 @@ exportOptions = [
     ];
 
     this.selectedColumns = this.cols; 
+    this.fromDate.setHours(0, 0, 0, 0);
 
       this.fetchStations();
   }
@@ -122,7 +124,7 @@ exportOptions = [
         let toDate = this.toDate || new Date();
     
         // Set both fromDate and toDate to midnight if not already set
-        fromDate.setHours(0, 0, 0, 0); // Sets fromDate to 00:00:00 of the current date
+        // fromDate.setHours(0, 0, 0, 0); 
   
     if (!this.selectedPeriod) {
       // One-day range (same date for from and to with time included)
@@ -177,9 +179,11 @@ exportOptions = [
           break;
       }
     }
+
+    console.log(`Formatted From Date: ${formattedFromDate}, Formatted To Date: ${formattedToDate}`);
   
    
-    this.stationService.getStations(formattedFromDate!, formattedToDate!).subscribe(
+    this.stationService.getSensorssTime(formattedFromDate!, formattedToDate!).subscribe(
       (data: buoys) => {
          this.CWPRS01 = data.buoy1.map(buoy => ({
           ...buoy,
@@ -376,7 +380,7 @@ saveAsExcelFile(buffer: any, fileName: string): void {
  
  
 exportPDF(dt2: any) {
-  const filteredData: BuoyData[] = dt2.value;
+  const filteredData: SensorData[] = dt2.value;
  
   if (filteredData && filteredData.length > 0) {
       // Define fixed headers and fields to always include
